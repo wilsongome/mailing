@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -321,7 +321,7 @@ return [
         [
             'text'       => 'Campaigns',
             'icon_color' => 'red',
-            'url'        => '#',
+            'url'        => 'campaign/list',
         ],
         [
             'text'       => 'Mail Template',

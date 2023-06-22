@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("mail_template", function(Blueprint $table){
+        Schema::create("campaigns", function(Blueprint $table){
             $table->id();
-            $table->bigInteger("campaign_id")->unsigned();
-            $table->foreign("campaign_id")->references("id")->on("campaign")->onDelete("CASCADE");
             $table->string("name");
             $table->text("description")->nullable();
             $table->timestamps();
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop("mail_template");
+        Schema::drop("campaigns");
     }
 };
