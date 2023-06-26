@@ -8,7 +8,11 @@
 
 @section('content')
 
-<form method="post" action="campaign/1">
+@if(isset($success))
+<x-layout.alert status="Success" message="{{$success}}" class="success" />
+@endif
+
+<form method="post" action="/campaign/1">
     <x-form.btn_save />
     @csrf
     @method('PUT')
