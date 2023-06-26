@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger("campaign_id")->unsigned();
             $table->foreign("campaign_id")->references("id")->on("campaigns")->onDelete("CASCADE");
-            $table->bigInteger("mail_template_id")->unsigned();
-            $table->foreign("mail_template_id")->references("id")->on("mail_templates");
+            $table->bigInteger("email_template_id")->unsigned();
+            $table->foreign("email_template_id")->references("id")->on("email_templates")->onDelete("RESTRICT");
             $table->string("name");
             $table->text("description")->nullable();
             $table->timestamps();

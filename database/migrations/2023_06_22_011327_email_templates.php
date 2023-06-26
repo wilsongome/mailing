@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("mail_templates", function(Blueprint $table){
+        Schema::create("email_templates", function(Blueprint $table){
             $table->id();
             $table->bigInteger("campaign_id")->unsigned();
             $table->foreign("campaign_id")->references("id")->on("campaigns")->onDelete("CASCADE");
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop("mail_templates");
+        Schema::drop("email_templates");
     }
 };

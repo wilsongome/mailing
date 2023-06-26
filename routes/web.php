@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\EmailTemplateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,14 @@ Route::controller(CampaignController::class)->group(function (){
     Route::post('/campaign', 'store')->name('campaign.store');
     Route::match(['put', 'patch'],'/campaign/{id}', 'update')->name('campaign.update');
     Route::delete('/campaign/{id}', 'destroy')->name('campaign.destroy');
+});
+
+Route::controller(EmailTemplateController::class)->group(function (){
+    Route::get('/email_template/list', 'index')->name('email_template.list');
+    Route::get('/email_template/create', 'create')->name('email_template.create');
+    Route::get('/email_template/{id}/edit', 'edit')->name('email_template.edit');
+    Route::post('/email_template', 'store')->name('email_template.store');
+    Route::match(['put', 'patch'],'/email_template/{id}', 'update')->name('email_template.update');
+    Route::delete('/email_template/{id}', 'destroy')->name('email_template.destroy');
 });
 

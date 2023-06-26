@@ -324,14 +324,14 @@ return [
             'url'        => 'campaign/list',
         ],
         [
-            'text'       => 'Mail Template',
+            'text'       => 'E-mail Template',
             'icon_color' => 'yellow',
-            'url'        => '#',
+            'url'        => 'email_template/list',
         ],
         [
             'text'       => 'Contact List',
             'icon_color' => 'cyan',
-            'url'        => '#',
+            'url'        => 'contact_list/list',
         ],
         ['header' => 'account_settings'],
         [
