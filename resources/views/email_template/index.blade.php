@@ -18,7 +18,7 @@
 <x-layout.alert status="Success" message="{{session('success')}}" class="success" />
 @endif
 
-<x-layout.btn_new route="{{ route('campaign.create') }}"/>
+<x-layout.btn_new route="{{ route('email_template.create') }}"/>
 
 <table class="table table-hover table-bordered table-sm">
     <thead>

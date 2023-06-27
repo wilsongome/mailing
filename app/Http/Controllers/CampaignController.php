@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Campaign;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
-    public function index(Request $request)
+
+    public function getAll(): Collection
+    {
+        $campaigns = Campaign::all();
+        return $campaigns;
+    }
+    
+    public function index()
     {
         try{
-            $campaigns = Campaign::all();
+            $campaigns = $this->getAll();
             return view('campaign.index', ['campaigns' => $campaigns]);
         }catch(Exception $e){
             return redirect()->route('campaign.list')->with('error','The objects can not be listed!');

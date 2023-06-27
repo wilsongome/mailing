@@ -20,17 +20,28 @@ class EmailTemplateController extends Controller
 
     public function create()
     {
-        return view("email_template.create");
+        try{
+            $campaignController = new CampaignController();
+            $campaigns = $campaignController->getAll();
+            return view('email_template.create', ['campaigns' => $campaigns]);
+        }catch(Exception $e){
+            return redirect()->route('email_template.list')->with('error','The create page is down!');
+        }
+       
     }
 
     public function edit(Request $request)
     {
         try{
+
             $emailTemplate = EmailTemplate::find($request->id);
             if(!$emailTemplate || !$emailTemplate->id){
                 return redirect()->route('email_template.list')->with('error','Object not found!');
             }
-            return view('email_template.edit', ['emailTemplate' => $emailTemplate]);
+            $campaignController = new CampaignController();
+            $campaigns = $campaignController->getAll();
+            return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'campaigns' => $campaigns]);
+
         }catch(Exception $e){
             return redirect()->route('email_template.list')->with('error','The object can not be edited!');
         }
@@ -42,6 +53,7 @@ class EmailTemplateController extends Controller
             $emailTemplate = new EmailTemplate();
             $emailTemplate->name = $request->name;
             $emailTemplate->description = $request->description;
+            $emailTemplate->campaign_id = $request->campaign_id;
             $emailTemplate->save();
             return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'success'=>"Object created!"]);
         }catch(Exception $e){
@@ -55,8 +67,11 @@ class EmailTemplateController extends Controller
             $emailTemplate = EmailTemplate::find($request->id);
             $emailTemplate->name = $request->name;
             $emailTemplate->description = $request->description;
+            $emailTemplate->campaign_id = $request->campaign_id;
             $emailTemplate->save();
-            return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'success'=>"Object updated!"]);
+            $campaignController = new CampaignController();
+            $campaigns = $campaignController->getAll();
+            return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'campaigns' => $campaigns]);
         }catch(Exception $e){
             return redirect()->route('email_template.list')->with('error','The object can not be updated!');
         }

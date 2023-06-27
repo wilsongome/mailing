@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Campaigns')
+@section('title', 'Mailing System')
 
 @section('content_header')
     <h4>Campaigns</h4>
@@ -12,7 +12,7 @@
 <x-layout.alert status="Success" message="{{$success}}" class="success" />
 @endif
 
-<form method="post" action="/campaign/1">
+<form method="post" action="/campaign/{{ $campaign->id }}">
     <x-form.btn_save />
     @csrf
     @method('PUT')
