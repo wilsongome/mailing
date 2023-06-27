@@ -54,6 +54,8 @@ class EmailTemplateController extends Controller
             $emailTemplate->name = $request->name;
             $emailTemplate->description = $request->description;
             $emailTemplate->campaign_id = $request->campaign_id;
+            $emailTemplate->title = $request->title;
+            $emailTemplate->body = $request->body;
             $emailTemplate->save();
             return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'success'=>"Object created!"]);
         }catch(Exception $e){
@@ -68,6 +70,8 @@ class EmailTemplateController extends Controller
             $emailTemplate->name = $request->name;
             $emailTemplate->description = $request->description;
             $emailTemplate->campaign_id = $request->campaign_id;
+            $emailTemplate->title = $request->title;
+            $emailTemplate->body = $request->body;
             $emailTemplate->save();
             $campaignController = new CampaignController();
             $campaigns = $campaignController->getAll();
