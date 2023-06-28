@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmailTemplate;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class EmailTemplateController extends Controller
 {
@@ -72,10 +73,8 @@ class EmailTemplateController extends Controller
             $emailTemplate->campaign_id = $request->campaign_id;
             $emailTemplate->title = $request->title;
             $emailTemplate->body = $request->body;
-            $emailTemplate->save();
-            $campaignController = new CampaignController();
-            $campaigns = $campaignController->getAll();
-            return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'campaigns' => $campaigns]);
+            $emailTemplate->save(); 
+            return redirect()->route('email_template.edit', ['id'=>$emailTemplate->id]);
         }catch(Exception $e){
             return redirect()->route('email_template.list')->with('error','The object can not be updated!');
         }

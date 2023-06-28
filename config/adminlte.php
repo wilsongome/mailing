@@ -148,12 +148,12 @@ return [
     |
     */
 
-    'layout_topnav' => null,
-    'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
-    'layout_dark_mode' => null,
+    'layout_topnav' => true,
+    'layout_boxed' => false,
+    'layout_fixed_sidebar' => false,
+    'layout_fixed_navbar' => false,
+    'layout_fixed_footer' => false,
+    'layout_dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------

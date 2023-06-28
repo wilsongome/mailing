@@ -1,6 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'Mailing System')
+@extends('layouts.master')
 
 @section('content_header')
     <h4>E-mail template</h4>
@@ -40,32 +38,23 @@
     <div class="row">
         <div class="col-sm-12">
             <label class="form-label">Title</label>
-            <input type="text" class="form-control" name="title" id="title">
+            <input type="text" class="form-control" name="title" id="title" value="{{ $emailTemplate->title }}">
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
             <label class="form-label">Body</label>
-            <textarea class="form-control" name="body" id="body" rows="10"></textarea>
+            <textarea class="form-control" name="body" id="body" rows="10">{{ $emailTemplate->body }}</textarea>
         </div>
     </div>
 </form>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.tiny.cloud/1/jdxqdz2yqo4nis0fcx7y20c1moyjf1o0vpycvc2yfa4q2kq7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-   
-        ClassicEditor
-        .create( document.querySelector( '#body' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-
-</script>
-<style>
-    .ck-editor__editable {
-        min-height: 200px;
-        margin-bottom: 15px;
-    }
-</style>
-
+    tinymce.init({
+      selector: '#body',
+      plugins: 'code anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code',
+    });
+  </script>
 @stop

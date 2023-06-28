@@ -1,6 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'E-mail templates')
+@extends('layouts.master')
 
 @section('content_header')
     <h4>E-mail templates</h4>

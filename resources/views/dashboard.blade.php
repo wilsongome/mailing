@@ -10,3 +10,7 @@
     <p>Welcome to this beautiful admin panel.</p>
 @stop
 
+
+@section('footer')
+    <strong>Developed by <a href="mailto:wilsongome@gmail.com">wilsongome@gmail.com</a></strong>
+@stop

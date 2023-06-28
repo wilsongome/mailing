@@ -1,6 +1,5 @@
-@extends('adminlte::page')
+@extends('layouts.master')
 
-@section('title', 'Mailing System')
 
 @section('content_header')
     <h4>Campaigns</h4>
