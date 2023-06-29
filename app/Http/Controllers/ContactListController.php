@@ -47,13 +47,34 @@ class ContactListController extends Controller
     public function store(Request $request)
     {
         try{
-           /*  $campaign = new Campaign();
-            $campaign->name = $request->name;
-            $campaign->description = $request->description;
-            $campaign->save();
-            return view('campaign.edit', ['campaign' => $campaign, 'success'=>"Object created!"]); */
+            $contactList = new ContactList();
+            $contactList->campaign_id = $request->campaign_id;
+            $contactList->email_template_id = $request->email_template_id;
+            $contactList->name = $request->name;
+            $contactList->description = $request->description;
+           /*  $request->validate([
+                'contact_list_file' => 'required|mimes:csv, text/csv|max:2048',
+            ]); */
+
+            if($request->hasFile('contact_list_file')){
+
+                //Storage::delete('/public/avatars/'.$user->avatar);
+    
+                $fileName = $request->file('contact_list_file')->getClientOriginalName();
+                $extension = $request->file('contact_list_file')->getClientOriginalExtension();
+                $fileNameToStore = time().'.'.$extension;
+                // Upload Image
+                $filePath = $request->file('contact_list_file')->storeAs('contact_lists',$fileNameToStore);
+    
+            }
+
+            $contactList->file_name = $fileName;
+            $contactList->file_path = $filePath;
+            
+            $contactList->save();
+            return view('contact_list.edit', ['contactList' => $contactList, 'success'=>"Object created!"]);
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be created!');
+            return redirect()->route('contact_list.list')->with('error','The object can not be created!');
         }
     }
 

@@ -45,7 +45,7 @@
         <div class="col-sm-12">
             <label class="form-label">CSV File (Contact list)</label> 
             <i data-toggle="tooltip" data-placement="top" title="Submit a CSV file separated by semicolon (;). The first line of the file must be a header and the first column must be EMAIL, the second one must be NAME, then the next columns are free." class="fas fa-question-circle"></i>
-            <input class="form-control" type="file" name="contact_list_file" id="contact_list_file" />
+            <input required class="form-control" type="file" name="contact_list_file" id="contact_list_file" />
         </div>
     </div>
 </form>
