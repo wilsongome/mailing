@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,14 @@ Route::controller(EmailTemplateController::class)->group(function (){
     Route::post('/email_template', 'store')->name('email_template.store');
     Route::match(['put', 'patch'],'/email_template/{id}', 'update')->name('email_template.update');
     Route::delete('/email_template/{id}', 'destroy')->name('email_template.destroy');
+});
+
+Route::controller(ContactListController::class)->group(function (){
+    Route::get('/contact_list/list', 'index')->name('contact_list.list');
+    Route::get('/contact_list/create', 'create')->name('contact_list.create');
+    Route::get('/contact_list/{id}/edit', 'edit')->name('contact_list.edit');
+    Route::post('/contact_list', 'store')->name('contact_list.store');
+    Route::match(['put', 'patch'],'/contact_list/{id}', 'update')->name('contact_list.update');
+    Route::delete('/contact_list/{id}', 'destroy')->name('contact_list.destroy');
 });
 

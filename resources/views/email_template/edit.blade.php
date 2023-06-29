@@ -16,7 +16,7 @@
     @method('PUT')
     <div class="row">
         <div class="col-sm-6">
-            <label class="form-label">Campanha</label>
+            <label class="form-label">Campaing</label>
             <select required class="form-control" id="campaign_id" name="campaign_id">
                 <option value="">Select</option>
                 @foreach($campaigns as $campaign)

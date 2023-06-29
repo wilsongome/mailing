@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailTemplate;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 
 class EmailTemplateController extends Controller
 {
+    public function getAll(): Collection
+    {
+        $email_templates = EmailTemplate::all();
+        return $email_templates;
+    }
+    
     public function index(Request $request)
     {
         try{
-            $emailTemplates = EmailTemplate::all();
+            $emailTemplates = $this->getAll();
             return view('email_template.index', ['emailTemplates' => $emailTemplates]);
         }catch(Exception $e){
             return redirect()->route('email_template.list')->with('error','The objects can not be listed!');

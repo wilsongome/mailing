@@ -12,7 +12,7 @@
     @csrf
     <div class="row">
         <div class="col-sm-6">
-            <label class="form-label">Campanha</label>
+            <label class="form-label">Campaign</label>
             <select required class="form-control" id="campaign_id" name="campaign_id">
                 <option value="">Select</option>
                 @foreach($campaigns as $campaign)
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-6">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control" name="name" id="name">
+            <input required type="text" class="form-control" name="name" id="name">
         </div>
     </div>
     <div class="row">
