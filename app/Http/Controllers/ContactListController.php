@@ -31,7 +31,7 @@ class ContactListController extends Controller
         }
     }
 
-    /* public function edit(Request $request)
+   /*  /* public function edit(Request $request)
     {
         try{
             $campaign = Campaign::find($request->id);
@@ -43,7 +43,7 @@ class ContactListController extends Controller
             return redirect()->route('campaign.list')->with('error','The object can not be edited!');
         }
     } */
-
+ */
     public function store(Request $request)
     {
         try{
