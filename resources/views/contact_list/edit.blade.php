@@ -6,9 +6,14 @@
 
 @section('content')
 
-<form enctype="multipart/form-data" method="post" action="{{ route('contact_list.store') }}">
+@if(Session::has('success'))
+<x-layout.alert status="Success" message="{{Session::get('success')}}" class="success" />
+@endif
+
+<form enctype="multipart/form-data" method="post" action="{{ route('contact_list.update', ['id' => $contactList->id]) }}">
     <x-form.btn_save />
     @csrf
+    @method('PUT')
     <div class="row">
         <div class="col-sm-6">
             <label class="form-label">Campaign</label>
@@ -24,7 +29,7 @@
             <select required class="form-control" id="email_template_id" name="email_template_id">
                 <option value="">Select</option>
                 @foreach($email_templates as $email_template)
-                <option  {{$email_template->id == $contactList->campaign_id ? 'selected' : null}} value="{{$email_template->id}}">{{$email_template->id}} | {{$email_template->name}}</option>
+                <option  {{$email_template->id == $contactList->email_template_id ? 'selected' : null}} value="{{$email_template->id}}">{{$email_template->id}} | {{$email_template->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -46,7 +51,15 @@
             <label class="form-label">CSV File (Contact list)</label> 
             <i data-toggle="tooltip" data-placement="top" title="Submit a CSV file separated by semicolon (;). The first line of the file must be a header and the first column must be EMAIL, the second one must be NAME, then the next columns are free." class="fas fa-question-circle"></i>
             <input class="form-control" type="file" name="contact_list_file" id="contact_list_file" />
-            <p>{{$contactList->file_name}}</p>
+            <p>
+                <a href="{{ route('contact_list.download', ['id' => $contactList->id]) }}">
+                    <h5>
+                        <span class="badge badge-info">
+                            {{$contactList->file_name}} [DOWNLOAD]
+                        </span>
+                    </h5>
+                </a>
+            </p>
         </div>
     </div>
 </form>

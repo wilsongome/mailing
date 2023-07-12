@@ -5,9 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\ContactList;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response as FacadesResponse;
 
 class ContactListController extends Controller
 {
+
+    public function download(Request $request)
+    {
+        $contactList = ContactList::find($request->id);
+        if(!$contactList || !$contactList->id){
+            return redirect()->route('contact_list.list')->with('error','Object not found!');
+        }
+
+        $file= storage_path( "/app/". $contactList->file_path);
+        $headers = array('Content-Type: application/csv');
+        return FacadesResponse::download($file,  $contactList->file_name, $headers);
+
+        return redirect()->route('contact_list.edit', ['id' => $contactList->id]);
+    }
+
     public function index()
     {
         try{
@@ -31,19 +47,24 @@ class ContactListController extends Controller
         }
     }
 
-   /*  /* public function edit(Request $request)
+    public function edit(Request $request)
     {
         try{
-            $campaign = Campaign::find($request->id);
-            if(!$campaign || !$campaign->id){
-                return redirect()->route('campaign.list')->with('error','Object not found!');
+            $contactList = ContactList::find($request->id);
+            if(!$contactList || !$contactList->id){
+                return redirect()->route('contact_list.list')->with('error','Object not found!');
             }
-            return view('campaign.edit', ['campaign' => $campaign]);
+            
+            $campaignController = new CampaignController();
+            $emailTemplateController = new EmailTemplateController();
+            $campaigns = $campaignController->getAll();
+            $email_templates = $emailTemplateController->getAll();
+            return view('contact_list.edit', ['contactList' => $contactList, 'campaigns' => $campaigns, 'email_templates' => $email_templates]);
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be edited!');
+            return redirect()->route('contact_list.list')->with('error','The object can not be edited!');
         }
-    } */
- */
+    }
+
     public function store(Request $request)
     {
         try{
@@ -64,7 +85,7 @@ class ContactListController extends Controller
                 $extension = $request->file('contact_list_file')->getClientOriginalExtension();
                 $fileNameToStore = time().'.'.$extension;
                 // Upload Image
-                $filePath = $request->file('contact_list_file')->storeAs('contact_lists',$fileNameToStore);
+                $filePath = $request->file('contact_list_file')->storeAs('contact_lists', $fileNameToStore);
     
             }
 
@@ -72,34 +93,36 @@ class ContactListController extends Controller
             $contactList->file_path = $filePath;
             
             $contactList->save();
-            return view('contact_list.edit', ['contactList' => $contactList, 'success'=>"Object created!"]);
+            return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object created!');
         }catch(Exception $e){
             return redirect()->route('contact_list.list')->with('error','The object can not be created!');
         }
     }
 
-   /*  public function update(Request $request)
+    public function update(Request $request)
     {
         try{
-            $campaign = Campaign::find($request->id);
-            $campaign->name = $request->name;
-            $campaign->description = $request->description;
-            $campaign->save();
-            return view('campaign.edit', ['campaign' => $campaign, 'success'=>"Object updated!"]);
+            $contactList = ContactList::find($request->id);
+            $contactList->name = $request->name;
+            $contactList->description = $request->description;
+            $contactList->campaign_id = $request->campaign_id;
+            $contactList->email_template_id = $request->email_template_id;
+            $contactList->save();
+            return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object updated!');
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be updated!');
+            return redirect()->route('contact_list.list')->with('error','The object can not be updated!');
         }
-    } */
+    } 
 
-   /*  public function destroy(Request $request)
+    public function destroy(Request $request)
     {
         try{
-            $campaign = Campaign::find($request->id);
-            $campaign->delete();
-            return redirect()->route('campaign.list')->with('success','Object deleted!');
+            $contactList = ContactList::find($request->id);
+            $contactList->delete();
+            return redirect()->route('contact_list.list')->with('success','Object deleted!');
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be updated!');
+            return redirect()->route('contact_list.list')->with('error','The object can not be updated!');
         }
     }
- */
+
 }

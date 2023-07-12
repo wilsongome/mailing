@@ -45,5 +45,6 @@ Route::controller(ContactListController::class)->group(function (){
     Route::post('/contact_list', 'store')->name('contact_list.store');
     Route::match(['put', 'patch'],'/contact_list/{id}', 'update')->name('contact_list.update');
     Route::delete('/contact_list/{id}', 'destroy')->name('contact_list.destroy');
+    Route::get('/contact_list/{id}/download', 'download')->name('contact_list.download');
 });
 
