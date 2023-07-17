@@ -53,7 +53,6 @@ class ContactListController extends Controller
             if(!$contactList || !$contactList->id){
                 return redirect()->route('contact_list.list')->with('error','Object not found!');
             }
-            
             $campaignController = new CampaignController();
             $emailTemplateController = new EmailTemplateController();
             $campaigns = $campaignController->getAll();

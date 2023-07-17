@@ -9,7 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ContactListFile{
 
-    private $path_root = 'contact_lists';
+    private $storage_path = '/app/';
+    private $root_path = 'contact_lists';
+
+    public function content(string $filePath)
+    {
+        $result = [];
+        try{
+            $path = storage_path( $this->storage_path. $filePath);
+            $result = array_map('str_getcsv', file($path));
+        }catch(Exception $e){
+            Log::error($e);
+        }
+        return $result;
+    }
 
     public function destroy(string $filePath) : bool
     {
@@ -17,15 +30,19 @@ class ContactListFile{
             return Storage::delete($filePath);
         }catch(Exception $e){
             Log::error($e);
-            return false;
         }  
+        return false;
     }
 
     public function download(string $filePath, string $fileName)
     {
-        $file= storage_path( "/app/". $filePath);
-        $headers = array('Content-Type: application/csv');
-        return FacadesResponse::download($file,  $fileName, $headers);
+        try{
+            $file = storage_path( $this->storage_path. $filePath);
+            $headers = array('Content-Type: application/csv');
+            return FacadesResponse::download($file,  $fileName, $headers);
+        }catch(Exception $e){
+            Log::error($e);
+        }  
     }
 
     public function store(UploadedFile $file) : array
@@ -36,7 +53,7 @@ class ContactListFile{
             $extension = $file->getClientOriginalExtension();
             $fileNameToStore = time().'.'.$extension;
             //Save to disc
-            $filePath = $file->storeAs($this->path_root, $fileNameToStore);
+            $filePath = $file->storeAs($this->root_path, $fileNameToStore);
             $result = ['fileName' => $fileName, 'filePath' => $filePath];
         }catch(Exception $e){
             Log::error($e);
