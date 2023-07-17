@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\ContactListFile;
 use App\Models\ContactList;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,11 +18,9 @@ class ContactListController extends Controller
             return redirect()->route('contact_list.list')->with('error','Object not found!');
         }
 
-        $file= storage_path( "/app/". $contactList->file_path);
-        $headers = array('Content-Type: application/csv');
-        return FacadesResponse::download($file,  $contactList->file_name, $headers);
+        $contactListFile = new ContactListFile();
+        return $contactListFile->download($contactList->file_path, $contactList->file_name);
 
-        return redirect()->route('contact_list.edit', ['id' => $contactList->id]);
     }
 
     public function index()
@@ -73,26 +72,19 @@ class ContactListController extends Controller
             $contactList->email_template_id = $request->email_template_id;
             $contactList->name = $request->name;
             $contactList->description = $request->description;
-           /*  $request->validate([
-                'contact_list_file' => 'required|mimes:csv, text/csv|max:2048',
-            ]); */
+            $request->validate([
+                'contact_list_file' => 'required|mimes:csv,txt|max:2048'
+            ]);
 
             if($request->hasFile('contact_list_file')){
-
-                //Storage::delete('/public/avatars/'.$user->avatar);
-    
-                $fileName = $request->file('contact_list_file')->getClientOriginalName();
-                $extension = $request->file('contact_list_file')->getClientOriginalExtension();
-                $fileNameToStore = time().'.'.$extension;
-                // Upload Image
-                $filePath = $request->file('contact_list_file')->storeAs('contact_lists', $fileNameToStore);
-    
+                $contactListFile = new ContactListFile();
+                $storage = $contactListFile->store($request->file('contact_list_file'), 'contact_list_file');
             }
 
-            $contactList->file_name = $fileName;
-            $contactList->file_path = $filePath;
-            
+            $contactList->file_name = $storage['fileName'];
+            $contactList->file_path = $storage['filePath'];
             $contactList->save();
+
             return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object created!');
         }catch(Exception $e){
             return redirect()->route('contact_list.list')->with('error','The object can not be created!');
@@ -107,6 +99,18 @@ class ContactListController extends Controller
             $contactList->description = $request->description;
             $contactList->campaign_id = $request->campaign_id;
             $contactList->email_template_id = $request->email_template_id;
+            if($request->hasFile('contact_list_file')){
+                $request->validate([
+                    'contact_list_file' => 'required|mimes:csv,txt|max:2048'
+                ]);
+                $contactListFile = new ContactListFile();
+                //Remove antigo arquivo
+                $contactListFile->destroy($contactList->file_path);
+                //Salva o novo arquivo
+                $storage = $contactListFile->store($request->file('contact_list_file'), 'contact_list_file');
+                $contactList->file_name = $storage['fileName'];
+                $contactList->file_path = $storage['filePath'];
+            }
             $contactList->save();
             return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object updated!');
         }catch(Exception $e){
