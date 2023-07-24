@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Service\RabbitMQService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post("/message", function (Request $request) {
+    $message = $_POST['message'];
+    $mqService = new RabbitMQService();
+    $mqService->publish($message);
+    return view('amq');
 });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\ContactListFile;
+use App\Domain\ContactList\ContactListFile;
 use App\Models\ContactList;
 use Exception;
 use Illuminate\Http\Request;

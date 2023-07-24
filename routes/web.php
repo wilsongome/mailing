@@ -3,6 +3,7 @@
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
+});
+Route::get('/amq', function () {
+    return view('amq');
 });
 
 Route::controller(CampaignController::class)->group(function (){
@@ -47,4 +51,3 @@ Route::controller(ContactListController::class)->group(function (){
     Route::delete('/contact_list/{id}', 'destroy')->name('contact_list.destroy');
     Route::get('/contact_list/{id}/download', 'download')->name('contact_list.download');
 });
-

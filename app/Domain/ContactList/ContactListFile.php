@@ -1,5 +1,5 @@
 <?php 
-namespace App\Domain;
+namespace App\Domain\ContactList;
 
 use Exception;
 use Illuminate\Http\UploadedFile;
