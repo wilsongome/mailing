@@ -12,6 +12,9 @@
 
 <form method="post" action="/campaign/{{ $campaign->id }}">
     <x-form.btn_save />
+
+    <x-campaign.tabs campaign="{{ $campaign->id }}" />
+
     @csrf
     @method('PUT')
     <div class="mb-3">

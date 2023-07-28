@@ -321,17 +321,17 @@ return [
         [
             'text'       => 'Campaigns',
             'icon_color' => 'red',
-            'url'        => 'campaign/list',
+            'url'        => 'campaign',
         ],
         [
             'text'       => 'E-mail Template',
             'icon_color' => 'yellow',
-            'url'        => 'email_template/list',
+            'url'        => 'email_template',
         ],
         [
             'text'       => 'Contact List',
             'icon_color' => 'cyan',
-            'url'        => 'contact_list/list',
+            'url'        => 'contact_list',
         ],
         ['header' => 'account_settings'],
         [

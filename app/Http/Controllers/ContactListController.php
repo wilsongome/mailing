@@ -15,7 +15,7 @@ class ContactListController extends Controller
     {
         $contactList = ContactList::find($request->id);
         if(!$contactList || !$contactList->id){
-            return redirect()->route('contact_list.list')->with('error','Object not found!');
+            return redirect()->route('contact_list.index')->with('error','Object not found!');
         }
 
         $contactListFile = new ContactListFile();
@@ -29,7 +29,7 @@ class ContactListController extends Controller
             $contact_lists = ContactList::all();
             return view('contact_list.index', ['contact_lists' => $contact_lists]);
         }catch(Exception $e){
-            return redirect()->route('contact_list.list')->with('error','The objects can not be listed!');
+            return redirect()->route('contact_list.index')->with('error','The objects can not be listed!');
         }
     }
 
@@ -42,7 +42,7 @@ class ContactListController extends Controller
             $email_templates = $emailTemplateController->getAll();
             return view('contact_list.create', ['campaigns' => $campaigns, 'email_templates' => $email_templates]);
         }catch(Exception $e){
-            return redirect()->route('contact_list.list')->with('error','The create page is down!');
+            return redirect()->route('contact_list.index')->with('error','The create page is down!');
         }
     }
 
@@ -51,7 +51,7 @@ class ContactListController extends Controller
         try{
             $contactList = ContactList::find($request->id);
             if(!$contactList || !$contactList->id){
-                return redirect()->route('contact_list.list')->with('error','Object not found!');
+                return redirect()->route('contact_list.index')->with('error','Object not found!');
             }
             $campaignController = new CampaignController();
             $emailTemplateController = new EmailTemplateController();
@@ -59,7 +59,7 @@ class ContactListController extends Controller
             $email_templates = $emailTemplateController->getAll();
             return view('contact_list.edit', ['contactList' => $contactList, 'campaigns' => $campaigns, 'email_templates' => $email_templates]);
         }catch(Exception $e){
-            return redirect()->route('contact_list.list')->with('error','The object can not be edited!');
+            return redirect()->route('contact_list.index')->with('error','The object can not be edited!');
         }
     }
 
@@ -86,7 +86,7 @@ class ContactListController extends Controller
 
             return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object created!');
         }catch(Exception $e){
-            return redirect()->route('contact_list.list')->with('error','The object can not be created!');
+            return redirect()->route('contact_list.index')->with('error','The object can not be created!');
         }
     }
 
@@ -113,7 +113,7 @@ class ContactListController extends Controller
             $contactList->save();
             return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object updated!');
         }catch(Exception $e){
-            return redirect()->route('contact_list.list')->with('error','The object can not be updated!');
+            return redirect()->route('contact_list.index')->with('error','The object can not be updated!');
         }
     } 
 
@@ -122,9 +122,9 @@ class ContactListController extends Controller
         try{
             $contactList = ContactList::find($request->id);
             $contactList->delete();
-            return redirect()->route('contact_list.list')->with('success','Object deleted!');
+            return redirect()->route('contact_list.index')->with('success','Object deleted!');
         }catch(Exception $e){
-            return redirect()->route('contact_list.list')->with('error','The object can not be updated!');
+            return redirect()->route('contact_list.index')->with('error','The object can not be updated!');
         }
     }
 

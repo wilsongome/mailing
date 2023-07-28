@@ -22,7 +22,7 @@ class EmailTemplateController extends Controller
             $emailTemplates = $this->getAll();
             return view('email_template.index', ['emailTemplates' => $emailTemplates]);
         }catch(Exception $e){
-            return redirect()->route('email_template.list')->with('error','The objects can not be listed!');
+            return redirect()->route('email_template.index')->with('error','The objects can not be listed!');
         }
     }
 
@@ -33,7 +33,7 @@ class EmailTemplateController extends Controller
             $campaigns = $campaignController->getAll();
             return view('email_template.create', ['campaigns' => $campaigns]);
         }catch(Exception $e){
-            return redirect()->route('email_template.list')->with('error','The create page is down!');
+            return redirect()->route('email_template.index')->with('error','The create page is down!');
         }
        
     }
@@ -44,14 +44,14 @@ class EmailTemplateController extends Controller
 
             $emailTemplate = EmailTemplate::find($request->id);
             if(!$emailTemplate || !$emailTemplate->id){
-                return redirect()->route('email_template.list')->with('error','Object not found!');
+                return redirect()->route('email_template.index')->with('error','Object not found!');
             }
             $campaignController = new CampaignController();
             $campaigns = $campaignController->getAll();
             return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'campaigns' => $campaigns]);
 
         }catch(Exception $e){
-            return redirect()->route('email_template.list')->with('error','The object can not be edited!');
+            return redirect()->route('email_template.index')->with('error','The object can not be edited!');
         }
     }
 
@@ -67,7 +67,7 @@ class EmailTemplateController extends Controller
             $emailTemplate->save();
             return redirect()->route('email_template.edit', ['id'=>$emailTemplate->id])->with('success', "Object created!");
         }catch(Exception $e){
-            return redirect()->route('email_template.list')->with('error','The object can not be created!');
+            return redirect()->route('email_template.index')->with('error','The object can not be created!');
         }
     }
 
@@ -83,7 +83,7 @@ class EmailTemplateController extends Controller
             $emailTemplate->save(); 
             return redirect()->route('email_template.edit', ['id'=>$emailTemplate->id]);
         }catch(Exception $e){
-            return redirect()->route('email_template.list')->with('error','The object can not be updated!');
+            return redirect()->route('email_template.index')->with('error','The object can not be updated!');
         }
     }
 
@@ -92,9 +92,9 @@ class EmailTemplateController extends Controller
         try{
             $emailTemplate = EmailTemplate::find($request->id);
             $emailTemplate->delete();
-            return redirect()->route('email_template.list')->with('success','Object deleted!');
+            return redirect()->route('email_template.index')->with('success','Object deleted!');
         }catch(Exception $e){
-            return redirect()->route('email_template.list')->with('error','The object can not be updated!');
+            return redirect()->route('email_template.index')->with('error','The object can not be updated!');
         }
     }
 }

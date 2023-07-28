@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Campaign\CampaignHandler;
+use App\Jobs\ProcessCampaign;
 use App\Models\Campaign;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,6 +11,30 @@ use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
+
+    public function processing(Request $request)
+    {
+        try {
+            $campaign_id = (int) $request->id;
+            ProcessCampaign::dispatch($campaign_id);
+            return  redirect()->route('campaign.process', ['id' => $campaign_id])->with('success', 'Campaign starded!');
+        } catch (Exception $e) {
+            return  redirect()->route('campaign.process', ['id' => $campaign_id])->with('success', 'The campaign can not be processed!');
+        }
+    }
+
+    public function process(Request $request)
+    {
+        try{
+            $campaign = Campaign::find($request->id);
+            if(!$campaign || !$campaign->id){
+                return redirect()->route('campaign.index')->with('error','Object not found!');
+            }
+            return view('campaign.process', ['campaign' => $campaign]);
+        }catch(Exception $e){
+            return redirect()->route('campaign.index')->with('error','The object can not be edited!');
+        }
+    }
 
     public function getAll(): Collection
     {
@@ -36,11 +62,11 @@ class CampaignController extends Controller
         try{
             $campaign = Campaign::find($request->id);
             if(!$campaign || !$campaign->id){
-                return redirect()->route('campaign.list')->with('error','Object not found!');
+                return redirect()->route('campaign.index')->with('error','Object not found!');
             }
             return view('campaign.edit', ['campaign' => $campaign]);
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be edited!');
+            return redirect()->route('campaign.index')->with('error','The object can not be edited!');
         }
     }
 
@@ -53,7 +79,7 @@ class CampaignController extends Controller
             $campaign->save();
             return view('campaign.edit', ['campaign' => $campaign, 'success'=>"Object created!"]);
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be created!');
+            return redirect()->route('campaign.index')->with('error','The object can not be created!');
         }
     }
 
@@ -66,7 +92,7 @@ class CampaignController extends Controller
             $campaign->save();
             return view('campaign.edit', ['campaign' => $campaign, 'success'=>"Object updated!"]);
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be updated!');
+            return redirect()->route('campaign.index')->with('error','The object can not be updated!');
         }
     }
 
@@ -75,9 +101,9 @@ class CampaignController extends Controller
         try{
             $campaign = Campaign::find($request->id);
             $campaign->delete();
-            return redirect()->route('campaign.list')->with('success','Object deleted!');
+            return redirect()->route('campaign.index')->with('success','Object deleted!');
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The object can not be updated!');
+            return redirect()->route('campaign.index')->with('error','The object can not be updated!');
         }
     }
 
