@@ -45,21 +45,13 @@
     </div>
 </form>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.tiny.cloud/1/jdxqdz2yqo4nis0fcx7y20c1moyjf1o0vpycvc2yfa4q2kq7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-   
-        ClassicEditor
-        .create( document.querySelector( '#body' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-
-</script>
-<style>
-    .ck-editor__editable {
-        min-height: 200px;
-        margin-bottom: 15px;
-    }
-</style>
+    tinymce.init({
+      selector: '#body',
+      plugins: 'code anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat | code',
+    });
+  </script>
 
 @stop

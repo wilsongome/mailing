@@ -17,9 +17,19 @@ class ContactListFile{
         $result = [];
         try{
             $path = storage_path( $this->storage_path. $filePath);
-            $result = array_map('str_getcsv', file($path));
+            $lines = array_map('str_getcsv', file($path));
+            $headers = explode(";", $lines[0][0]);
+            $i = -1;
+            foreach($lines as $values){
+                $i++;
+                if($i == 0){
+                    continue;
+                }
+                array_push( $result, array_combine( $headers, explode( ";", $values[0] ) ) );
+            }
         }catch(Exception $e){
             Log::error($e);
+            return $result;
         }
         return $result;
     }

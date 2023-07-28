@@ -65,7 +65,7 @@ class EmailTemplateController extends Controller
             $emailTemplate->title = $request->title;
             $emailTemplate->body = $request->body;
             $emailTemplate->save();
-            return view('email_template.edit', ['emailTemplate' => $emailTemplate, 'success'=>"Object created!"]);
+            return redirect()->route('email_template.edit', ['id'=>$emailTemplate->id])->with('success', "Object created!");
         }catch(Exception $e){
             return redirect()->route('email_template.list')->with('error','The object can not be created!');
         }

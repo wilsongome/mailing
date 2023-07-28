@@ -1,0 +1,3 @@
+{!! $campaignEmailMessageHandler->body !!}
+        
+

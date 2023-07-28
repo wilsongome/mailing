@@ -1,9 +1,11 @@
 <?php
 
+use App\Domain\Campaign\CampaignHandler;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,24 @@ Route::get('/', function () {
 });
 Route::get('/amq', function () {
     return view('amq');
+});
+
+Route::get('/campaign/{id}/send', function (Request $request) {
+    $id = (int) $request->id;
+    $campaignHandler = new CampaignHandler($id);
+    $campaignHandler->execute();
+});
+
+Route::get('/teste', function () {
+    try{
+        $send = Mail::raw('Mensagem de teste!', function ($message) {
+            $message->to('teste@teste.com')
+              ->subject('Teste funcionou!');
+        });
+    }catch(Exception $e){
+        echo $e->getMessage();
+    }
+    echo "ok!";
 });
 
 Route::controller(CampaignController::class)->group(function (){

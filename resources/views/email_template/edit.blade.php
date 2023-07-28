@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-sm-12">
             <label class="form-label">Body</label>
-            <textarea class="form-control" name="body" id="body" rows="10">{{ $emailTemplate->body }}</textarea>
+            <textarea class="form-control" name="body" id="body" rows="60">{{ $emailTemplate->body }}</textarea>
         </div>
     </div>
 </form>
