@@ -90,7 +90,7 @@ class CampaignController extends Controller
             $campaign->name = $request->name;
             $campaign->description = $request->description;
             $campaign->save();
-            return view('campaign.edit', ['campaign' => $campaign, 'success'=>"Object updated!"]);
+            return redirect()->route('campaign.edit', ['id' => $campaign->id])->with('success','Object updated!');
         }catch(Exception $e){
             return redirect()->route('campaign.index')->with('error','The object can not be updated!');
         }
