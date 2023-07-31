@@ -15,11 +15,12 @@ class CampaignController extends Controller
     public function processing(Request $request)
     {
         try {
-            $campaign_id = (int) $request->id;
-            ProcessCampaign::dispatch($campaign_id);
-            return  redirect()->route('campaign.process', ['id' => $campaign_id])->with('success', 'Campaign starded!');
+            $campaignId = (int) $request->id;
+            ProcessCampaign::dispatch($campaignId);
+            return  redirect()->route('campaign.process', ['id' => $campaignId])->with('success', 'Campaign starded!');
         } catch (Exception $e) {
-            return  redirect()->route('campaign.process', ['id' => $campaign_id])->with('success', 'The campaign can not be processed!');
+            return  redirect()
+            ->route('campaign.process', ['id' => $campaignId])->with('success', 'The campaign can not be processed!');
         }
     }
 
@@ -38,8 +39,7 @@ class CampaignController extends Controller
 
     public function getAll(): Collection
     {
-        $campaigns = Campaign::all();
-        return $campaigns;
+        return Campaign::all();
     }
     
     public function index()

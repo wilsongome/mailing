@@ -36,7 +36,7 @@ Route::get('/campaign/{id}/send', function (Request $request) {
 
 Route::get('/teste', function () {
     try{
-        $send = Mail::raw('Mensagem de teste!', function ($message) {
+        Mail::raw('Mensagem de teste!', function ($message) {
             $message->to('teste@teste.com')
               ->subject('Teste funcionou!');
         });

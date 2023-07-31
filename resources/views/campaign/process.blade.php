@@ -16,7 +16,7 @@
         <form method="post" action="/campaign/{{ $campaign->id }}/processing">
             @csrf
             <button class="btn btn-success" type="submit">
-                <i class="fas fa-sync"></i> 
+                <i class="fas fa-sync"></i>
                  Process Now
             </button>
         </form>
