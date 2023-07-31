@@ -77,7 +77,7 @@ class CampaignController extends Controller
             $campaign->name = $request->name;
             $campaign->description = $request->description;
             $campaign->save();
-            return view('campaign.edit', ['campaign' => $campaign, 'success'=>"Object created!"]);
+            return redirect()->route('campaign.edit', ['id' => $campaign->id])->with('success','Object created!');
         }catch(Exception $e){
             return redirect()->route('campaign.index')->with('error','The object can not be created!');
         }
