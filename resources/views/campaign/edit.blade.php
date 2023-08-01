@@ -17,13 +17,29 @@
 
     @csrf
     @method('PUT')
-    <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input required type="text" class="form-control" name="name" id="name" value="{{ $campaign->name }}">
+    <div class="row">
+        <div class="col-sm-6">
+            <label class="form-label">Name</label>
+            <input required type="text" class="form-control" name="name" id="name" value="{{ $campaign->name }}">
+        </div>
+        <div class="col-sm-6">
+            <label class="form-label">Status</label>
+            <h3>
+                <span class="badge badge-{{ CampaignStatus::statusColor($campaign->status) }}">
+                    {{ $campaign->status }}
+                </span>
+            </h3>
+        </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" name="description" id="description" rows="3">{{ $campaign->description }}</textarea>
+    <div class="row">
+        <div class="col-sm-12">
+            <label class="form-label">Description</label>
+        <textarea
+        class="form-control"
+        name="description"
+        id="description"
+        rows="3">{{ $campaign->description }}</textarea>
+        </div>
     </div>
 </form>
 

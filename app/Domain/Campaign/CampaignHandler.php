@@ -2,6 +2,7 @@
 namespace App\Domain\Campaign;
 
 use App\Domain\ContactList\ContactListFile;
+use App\Jobs\ProcessCampaign;
 use App\Mail\CampaignEmailMessage;
 use App\Models\Campaign;
 use App\Models\ContactList;
@@ -11,11 +12,41 @@ use Illuminate\Support\Facades\Mail;
 
 class CampaignHandler{
 
-    private int $campaign_id;
+    private int $campaignId;
 
-    public function __construct(int $campaign_id)
+    public function __construct(int $campaignId)
     {
-        $this->campaign_id = $campaign_id;
+        $this->campaignId = $campaignId;
+    }
+
+    public function validateExecute(): array
+    {
+        try{
+            $result = [ 'status' => false, 'campaign' => null , 'message' => null];
+            $campaign = Campaign::find($this->campaignId);
+
+            if(!$campaign){
+                $result ['message'] = "Campaign not found!";
+            }
+
+            $contacLists = ContactList::where('campaign_id', $this->campaignId)->get();
+            if(!$contacLists){
+                $result['message'] = "Campaign dos not have contact lists!";
+            }
+
+            if($campaign->status != 'STAND_BY'){
+                $result['message'] = "The status dos not allow to execute!";
+            }
+
+            $result['status'] = true;
+            $result['campaign'] = $campaign;
+            $result['contactLists'] = $contacLists;
+
+        }catch(Exception $e){
+            $result['message'] = "Generic error, the campaign will be not executed!";
+        }
+        
+        return $result;
     }
 
     private function validateMainValues(array $values)
@@ -104,7 +135,7 @@ class CampaignHandler{
         $result = [];
         try {
             foreach($contacLists as $contactList){
-                $result[] = $this->addContactListToQueue($contactList); 
+                $result[] = $this->addContactListToQueue($contactList);
             }
         } catch (Exception $e) {
             return $result;
@@ -117,24 +148,32 @@ class CampaignHandler{
         try {
 
             $result = [];
+            $validateExecute = $this->validateExecute();
 
-            $campaign = Campaign::find($this->campaign_id);
-            if(!$campaign){
-                return ['status'=>false, 'message'=>"Campaign not found!"];
-            }
-
-            $contacLists = ContactList::where('campaign_id', $this->campaign_id)->get();
-            if(!$contacLists){
-                return ['status'=>false, 'message'=>"Campaign dos not have contact lists!"]; 
+            if(!$validateExecute['status']){
+                return $validateExecute;
             }
             
             $result['status'] = true;
-            $result['contactLists'] = $this->processContactLists($contacLists);
+            $result['contactLists'] = $this->processContactLists($validateExecute['contactLists']);
             
         } catch (Exception $e) {
-            return ['status'=>false, 'message'=>$e->getMessage()];
+            $result =  ['status'=>false, 'message'=>$e->getMessage()];
         }
+
         return $result;
+    }
+
+    public function executeInBatch(): array
+    {
+        $validateExecute = $this->validateExecute();
+
+        if(!$validateExecute['status']){
+            return $validateExecute;
+        }
+        
+        ProcessCampaign::dispatch($this->campaignId);
+        return $validateExecute;
     }
 }
 ?>

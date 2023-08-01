@@ -183,7 +183,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'ContactListStatus' => App\Domain\ContactList\ContactListStatus::class
+        'ContactListStatus' => App\Domain\ContactList\ContactListStatus::class,
+        'CampaignStatus' => App\Domain\Campaign\CampaignStatus::class
     ])->toArray(),
 
 ];

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Domain\Service\RabbitMQService;
+use App\Services\RabbitMQService;
 use Illuminate\Console\Command;
 
 class MQConsumerCommand extends Command
@@ -26,7 +26,7 @@ class MQConsumerCommand extends Command
      */
     public function handle(): void
     {
-        $mqService = new RabbitMQService;
+        $mqService = new RabbitMQService();
         $mqService->consume();
     }
 }
