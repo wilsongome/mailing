@@ -6,8 +6,11 @@
 
 @section('content')
 
-@if(isset($success))
-<x-layout.alert status="Success" message="{{$success}}" class="success" />
+@if(session('error'))
+<x-layout.alert status="Error" message="{{session('error')}}" class="danger" />
+@endif
+@if(session('success'))
+<x-layout.alert status="Success" message="{{session('success')}}" class="success" />
 @endif
 
 <div class="row">
