@@ -10,7 +10,7 @@
 <x-layout.alert status="Success" message="{{Session::get('success')}}" class="success" />
 @endif
 
-<form enctype="multipart/form-data" method="post" action="{{ route('contact_list.update', ['id' => $contactList->id]) }}">
+<form enctype="multipart/form-data" method="post" action="{{route('contact_list.update', ['id' => $contactList->id])}}">
     <x-form.btn_save />
     @csrf
     @method('PUT')
@@ -20,7 +20,9 @@
             <select required class="form-control" id="campaign_id" name="campaign_id">
                 <option value="">Select</option>
                 @foreach($campaigns as $campaign)
-                <option {{$campaign->id == $contactList->campaign_id ? 'selected' : null}} value="{{$campaign->id}}">{{$campaign->id}} | {{$campaign->name}}</option>
+                <option {{$campaign->id == $contactList->campaign_id ? 'selected' : null}}
+                    value="{{$campaign->id}}">{{$campaign->id}} | {{$campaign->name}}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -28,8 +30,11 @@
             <label class="form-label">E-mail template</label>
             <select required class="form-control" id="email_template_id" name="email_template_id">
                 <option value="">Select</option>
-                @foreach($email_templates as $email_template)
-                <option  {{$email_template->id == $contactList->email_template_id ? 'selected' : null}} value="{{$email_template->id}}">{{$email_template->id}} | {{$email_template->name}}</option>
+                @foreach($emailTemplates as $emailTemplate)
+                <option  {{$emailTemplate->id == $contactList->email_template_id ? 'selected' : null}}
+                    value="{{$emailTemplate->id}}">
+                    {{$emailTemplate->id}} | {{$emailTemplate->name}}
+                </option>
                 @endforeach
             </select>
         </div>
