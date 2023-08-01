@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Campaign\CampaignHandler;
+use App\Domain\Campaign\CampaignStatus;
 use App\Jobs\ProcessCampaign;
 use App\Models\Campaign;
 use App\Models\ContactList;
@@ -17,11 +18,23 @@ class CampaignController extends Controller
     {
         try {
             $campaignId = (int) $request->id;
-            ProcessCampaign::dispatch($campaignId);
-            return  redirect()->route('campaign.process', ['id' => $campaignId])->with('success', 'Campaign starded!');
+            $campaignHandler = new CampaignHandler($campaignId);
+            $executeResult = $campaignHandler->executeInBatch();
+            
+            if(!$executeResult['status']){
+                return  redirect()
+                ->route('campaign.process', ['id' => $campaignId])
+                ->with('error', $executeResult['message']);
+            }
+
+            return  redirect()
+                ->route('campaign.process', ['id' => $campaignId])
+                ->with('success', 'Execution starded!');
+            
         } catch (Exception $e) {
             return  redirect()
-            ->route('campaign.process', ['id' => $campaignId])->with('success', 'The campaign can not be processed!');
+            ->route('campaign.process', ['id' => $campaignId])
+            ->with('success', 'The campaign can not be processed!');
         }
     }
 
@@ -56,7 +69,8 @@ class CampaignController extends Controller
 
     public function create()
     {
-        return view("campaign.create");
+        $statusList = CampaignStatus::statusList();
+        return view("campaign.create", ['statusList' => $statusList]);
     }
 
     public function edit(Request $request)
@@ -66,7 +80,9 @@ class CampaignController extends Controller
             if(!$campaign || !$campaign->id){
                 return redirect()->route('campaign.index')->with('error','Object not found!');
             }
-            return view('campaign.edit', ['campaign' => $campaign]);
+            $statusList = CampaignStatus::statusList();
+
+            return view('campaign.edit', ['campaign' => $campaign, 'statusList' => $statusList]);
         }catch(Exception $e){
             return redirect()->route('campaign.index')->with('error','The object can not be edited!');
         }
@@ -78,6 +94,7 @@ class CampaignController extends Controller
             $campaign = new Campaign();
             $campaign->name = $request->name;
             $campaign->description = $request->description;
+            $campaign->status = 'STAND_BY';
             $campaign->save();
             return redirect()->route('campaign.edit', ['id' => $campaign->id])->with('success','Object created!');
         }catch(Exception $e){

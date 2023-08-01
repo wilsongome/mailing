@@ -28,6 +28,6 @@ class ProcessCampaign implements ShouldQueue
     public function handle(): void
     {
         $campaignHandler = new CampaignHandler($this->campaign_id);
-        $result = $campaignHandler->execute();
+        $campaignHandler->execute();
     }
 }
