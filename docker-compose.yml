@@ -32,8 +32,17 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
     volumes:
       - mysql-lib:/var/lib/mysql
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - my-networks
+    volumes:
+      - redis-lib:/bitnami/redis/data
 networks:
   my-networks:
     driver: bridge
 volumes:
   mysql-lib:
+  redis-lib:
