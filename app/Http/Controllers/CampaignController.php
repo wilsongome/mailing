@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\Campaign\CampaignHandler;
 use App\Jobs\ProcessCampaign;
 use App\Models\Campaign;
+use App\Models\ContactList;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -31,7 +32,8 @@ class CampaignController extends Controller
             if(!$campaign || !$campaign->id){
                 return redirect()->route('campaign.index')->with('error','Object not found!');
             }
-            return view('campaign.process', ['campaign' => $campaign]);
+            $contactLists = ContactList::where('campaign_id', $campaign->id)->get();
+            return view('campaign.process', ['campaign' => $campaign, 'contactLists' => $contactLists]);
         }catch(Exception $e){
             return redirect()->route('campaign.index')->with('error','The object can not be edited!');
         }

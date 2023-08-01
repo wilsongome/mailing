@@ -26,7 +26,35 @@
 <x-campaign.tabs campaign="{{ $campaign->id }}" />
 
 <div class='contact_list-grid'>
-    Listar as contact lists aqui
+    <table class='table table-hover table-sm'>
+        <caption></caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>File</th>
+                <th>Registers</th>
+                <th>Processed</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($contactLists as $contactList)
+            <tr>
+                <td>{{$contactList->name}}</td>
+                <td>{{$contactList->description}}</td>
+                <td>{{$contactList->file_name}}</td>
+                <td>{{$contactList->registers}}</td>
+                <td>{{$contactList->processed_registers}}</td>
+                <td>
+                    <span class="badge badge-{{ ContactListStatus::statusColor($contactList->status) }}">
+                        {{$contactList->status}}
+                    </span>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
 @stop

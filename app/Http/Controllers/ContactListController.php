@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Domain\ContactList\ContactListFile;
+use App\Domain\ContactList\ContactListStatus;
 use App\Models\ContactList;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response as FacadesResponse;
+
 
 class ContactListController extends Controller
 {
@@ -26,8 +27,8 @@ class ContactListController extends Controller
     public function index()
     {
         try{
-            $contact_lists = ContactList::all();
-            return view('contact_list.index', ['contact_lists' => $contact_lists]);
+            $contactLists = ContactList::all();
+            return view('contact_list.index', ['contactLists' => $contactLists]);
         }catch(Exception $e){
             return redirect()->route('contact_list.index')->with('error','The objects can not be listed!');
         }
@@ -39,8 +40,15 @@ class ContactListController extends Controller
             $campaignController         = new CampaignController();
             $emailTemplateController    = new EmailTemplateController();
             $campaigns = $campaignController->getAll();
-            $email_templates = $emailTemplateController->getAll();
-            return view('contact_list.create', ['campaigns' => $campaigns, 'email_templates' => $email_templates]);
+            $emailTemplates = $emailTemplateController->getAll();
+            $statusList = ContactListStatus::statusList();
+            return view('contact_list.create',
+                [
+                'campaigns' => $campaigns,
+                'emailTemplates' => $emailTemplates,
+                'statusList' => $statusList
+                ]
+            );
         }catch(Exception $e){
             return redirect()->route('contact_list.index')->with('error','The create page is down!');
         }
@@ -56,8 +64,17 @@ class ContactListController extends Controller
             $campaignController = new CampaignController();
             $emailTemplateController = new EmailTemplateController();
             $campaigns = $campaignController->getAll();
-            $email_templates = $emailTemplateController->getAll();
-            return view('contact_list.edit', ['contactList' => $contactList, 'campaigns' => $campaigns, 'email_templates' => $email_templates]);
+            $emailTemplates = $emailTemplateController->getAll();
+            $statusList = ContactListStatus::statusList();
+            return view(
+                'contact_list.edit',
+                [
+                    'contactList' => $contactList,
+                    'campaigns' => $campaigns,
+                    'emailTemplates' => $emailTemplates,
+                    'statusList' => $statusList
+                ]
+            );
         }catch(Exception $e){
             return redirect()->route('contact_list.index')->with('error','The object can not be edited!');
         }
@@ -71,6 +88,9 @@ class ContactListController extends Controller
             $contactList->email_template_id = $request->email_template_id;
             $contactList->name = $request->name;
             $contactList->description = $request->description;
+            $contactList->status = 'STAND_BY';
+            $contactList->registers = 0;
+            $contactList->processed_registers = 0;
             $request->validate([
                 'contact_list_file' => 'required|mimes:csv,txt|max:2048'
             ]);
@@ -84,7 +104,9 @@ class ContactListController extends Controller
             $contactList->file_path = $storage['filePath'];
             $contactList->save();
 
-            return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object created!');
+            return redirect()
+            ->route('contact_list.edit', ['id' => $contactList->id])
+            ->with('success','Object created!');
         }catch(Exception $e){
             return redirect()->route('contact_list.index')->with('error','The object can not be created!');
         }
@@ -98,6 +120,9 @@ class ContactListController extends Controller
             $contactList->description = $request->description;
             $contactList->campaign_id = $request->campaign_id;
             $contactList->email_template_id = $request->email_template_id;
+            $contactList->status = 'STAND_BY';
+            $contactList->registers = 0;
+            $contactList->processed_registers = 0;
             if($request->hasFile('contact_list_file')){
                 $request->validate([
                     'contact_list_file' => 'required|mimes:csv,txt|max:2048'
@@ -111,11 +136,15 @@ class ContactListController extends Controller
                 $contactList->file_path = $storage['filePath'];
             }
             $contactList->save();
-            return redirect()->route('contact_list.edit', ['id' => $contactList->id])->with('success','Object updated!');
+            return redirect()
+            ->route('contact_list.edit', ['id' => $contactList->id])
+            ->with('success','Object updated!');
         }catch(Exception $e){
-            return redirect()->route('contact_list.index')->with('error','The object can not be updated!');
+            return redirect()
+            ->route('contact_list.index')
+            ->with('error','The object can not be updated!');
         }
-    } 
+    }
 
     public function destroy(Request $request)
     {

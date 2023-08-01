@@ -23,8 +23,8 @@
             <label class="form-label">E-mail template</label>
             <select required class="form-control" id="email_template_id" name="email_template_id">
                 <option value="">Select</option>
-                @foreach($email_templates as $email_template)
-                <option value="{{$email_template->id}}">{{$email_template->id}} | {{$email_template->name}}</option>
+                @foreach($emailTemplates as $emailTemplate)
+                <option value="{{$emailTemplate->id}}">{{$emailTemplate->id}} | {{$emailTemplate->name}}</option>
                 @endforeach
             </select>
         </div>
