@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Domain\Campaign\CampaignHandler;
 use App\Domain\Campaign\CampaignStatus;
-use App\Jobs\ProcessCampaign;
 use App\Models\Campaign;
 use App\Models\ContactList;
 use Exception;

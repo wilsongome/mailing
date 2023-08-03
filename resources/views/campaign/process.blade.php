@@ -18,10 +18,21 @@
     <div class="col-sm-2">
         <form method="post" action="/campaign/{{ $campaign->id }}/processing">
             @csrf
-            <button class="btn btn-success" type="submit">
-                <i class="fas fa-sync"></i>
-                 Process Now
-            </button>
+            @if ($campaign->status == 'STAND_BY')
+                <button class="btn btn-success" type="submit">
+                    <i class="fas fa-sync"></i>
+                    Process Now
+                </button>
+            @endif
+            @if ($campaign->status != 'STAND_BY')
+            <a href="/campaign/{{ $campaign->id }}/process">
+                <button class="btn btn-default" type="button">
+                    <i class="fas fa-sync"></i>
+                    Refresh
+                </button>
+            </a>
+            @endif
+            
         </form>
     </div>
 </div>
