@@ -50,7 +50,7 @@ class ContactListHandler{
 
         $result['registers'] = count($contactListData);
 
-        $this->setStatus('TO_QUEUE');
+        ContactListStatus::setStatus($this->contactList->id, 'TO_QUEUE');
 
         try{
 
@@ -81,7 +81,7 @@ class ContactListHandler{
                 $result['ok']++;
             }
 
-            $this->setStatus('SENDING');
+            ContactListStatus::setStatus($this->contactList->id, 'SENDING');
 
         }catch(Exception $e){
             $result['error_log'][0][$e->getMessage()];
@@ -89,23 +89,5 @@ class ContactListHandler{
 
         return $result;
     }
-
-
-    public function setStatus(string $newStatus): bool
-    {
-        try{
-        
-            if(!ContactListStatus::canChange($this->contactList->status, $newStatus)){
-                return false;
-            }
-            $this->contactList->status = $newStatus;
-            $this->contactList->save();
-
-        }catch(Exception $e){
-            return false;
-        }
-        return true;
-    }
-
 
 }

@@ -34,10 +34,10 @@ class EmailMessageHandler{
             
             Mail::to($this->emailMessage->to)
             ->send(new CampaignEmailMessage(
-                $this->emailMessage,
                 $contactListId,
                 $registers,
-                $messagePosition));
+                $messagePosition,
+                $this->emailMessage));
                 
             $result = ['status' => true];
             

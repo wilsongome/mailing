@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Domain\Message\EmailResultHandler;
+use App\Domain\JobResultHandler;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
                 $payload = $event->job->payload();
                 $jobName = $payload['displayName'];
                 $jobResult = ['job' => $jobName, 'data' => $payload['data']['command'] ];
-                $emailResultHandler = new EmailResultHandler($jobResult);
+                $emailResultHandler = new JobResultHandler($jobResult);
                 $emailResultHandler->execute();
             }
         );

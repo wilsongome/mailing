@@ -20,10 +20,11 @@ class CampaignEmailMessage extends Mailable implements ShouldQueue
      * Create a new message instance.
      */
     public function __construct(
-        public EmailMessage $emailMessage,
         public int $contactListId,
         public int $registers,
-        public int $messagePosition)
+        public int $messagePosition,
+        public EmailMessage $emailMessage
+        )
     {
     
     }

@@ -93,7 +93,7 @@ class CampaignHandler{
             return $validateExecute;
         }
         
-        $this->setStatus('TO_QUEUE');
+        //$this->setStatus('TO_QUEUE');
         ProcessCampaign::dispatch($this->campaignId);
         return $validateExecute;
     }
