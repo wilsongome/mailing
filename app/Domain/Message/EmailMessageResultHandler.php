@@ -63,6 +63,7 @@ class EmailMessageResultHandler{
 
         //Agora só falta criar um método para validar se a campanha finalizou também
         //criar ele na CampaignHandler, para que possa ser reaproveitado por um command
+        //Corrigindo
 
         return true;
     }
