@@ -6,9 +6,7 @@
 
 @section('content')
 
-@if(isset($success))
-<x-layout.alert status="Success" message="{{$success}}" class="success" />
-@endif
+<x-layout.alert_handle />
 
 <form method="post" action="/campaign/{{ $campaign->id }}">
     <x-form.btn_save />

@@ -6,12 +6,7 @@
 
 @section('content')
 
-@if(session('error'))
-<x-layout.alert status="Error" message="{{session('error')}}" class="danger" />
-@endif
-@if(session('success'))
-<x-layout.alert status="Success" message="{{session('success')}}" class="success" />
-@endif
+<x-layout.alert_handle />
 
 <x-layout.btn_new route="{{ route('contact_list.create') }}"/>
 
