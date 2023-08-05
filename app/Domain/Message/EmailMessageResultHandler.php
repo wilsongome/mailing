@@ -1,6 +1,8 @@
 <?php
 namespace App\Domain\Message;
 
+use App\Domain\Campaign\CampaignHandler;
+use App\Domain\Campaign\CampaignStatus;
 use App\Domain\ContactList\ContactListStatus;
 use App\Models\ContactList;
 use Exception;
@@ -57,13 +59,13 @@ class EmailMessageResultHandler{
         $contactList->processed_registers = $messagePosition;
         $contactList->save();
 
+        ContactListStatus::setStatus($contactList->id, 'SENDING');
+        CampaignStatus::setStatus($contactList->campaign_id, 'SENDING');
+
         if($registers == $messagePosition){
             ContactListStatus::setStatus($contactList->id, 'STAND_BY');
+            CampaignStatus::toStandBy($contactList->campaign_id);
         }
-
-        //Agora só falta criar um método para validar se a campanha finalizou também
-        //criar ele na CampaignHandler, para que possa ser reaproveitado por um command
-        //Corrigindo
 
         return true;
     }

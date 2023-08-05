@@ -14,7 +14,7 @@
         <form method="post" action="/campaign/{{ $campaign->id }}/processing">
             @csrf
             @if ($campaign->status == 'STAND_BY')
-                <button class="btn btn-success" type="submit">
+                <button class="btn btn-success btn-process-campaign" type="submit">
                     <i class="fas fa-sync"></i>
                     Process Now
                 </button>

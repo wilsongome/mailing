@@ -1,15 +1,13 @@
 <?php
 namespace App\Domain\Campaign;
 
-use App\Domain\ContactList\ContactListFile;
 use App\Domain\ContactList\ContactListHandler;
+use App\Domain\ContactList\ContactListStatus;
 use App\Jobs\ProcessCampaign;
-use App\Mail\CampaignEmailMessage;
 use App\Models\Campaign;
 use App\Models\ContactList;
-use App\Models\EmailTemplate;
 use Exception;
-use Illuminate\Support\Facades\Mail;
+use Monolog\Handler\IFTTTHandler;
 
 class CampaignHandler{
 
@@ -54,10 +52,18 @@ class CampaignHandler{
     {
         $result = [];
         try {
+
+            foreach($contacLists as $contactList){
+                $contactList->processed_registers = 0;
+                $contactList->save();
+                ContactListStatus::setStatus($contactList->id, 'STAND_BY');
+            }
+
             foreach($contacLists as $contactList){
                 $contactListHandler = new ContactListHandler($contactList);
                 $result[] = $contactListHandler->addToQueue();
             }
+
         } catch (Exception $e) {
             return $result;
         }
@@ -93,7 +99,7 @@ class CampaignHandler{
             return $validateExecute;
         }
         
-        //$this->setStatus('TO_QUEUE');
+        $this->setStatus('TO_QUEUE');
         ProcessCampaign::dispatch($this->campaignId);
         return $validateExecute;
     }

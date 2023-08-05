@@ -81,8 +81,6 @@ class ContactListHandler{
                 $result['ok']++;
             }
 
-            ContactListStatus::setStatus($this->contactList->id, 'SENDING');
-
         }catch(Exception $e){
             $result['error_log'][0][$e->getMessage()];
         }
