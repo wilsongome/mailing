@@ -1,3 +1,3 @@
-{!! $campaignEmailMessageHandler->body !!}
+{!! $emailMessage->body !!}
         
 

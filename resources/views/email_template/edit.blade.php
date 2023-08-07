@@ -6,24 +6,13 @@
 
 @section('content')
 
-@if(isset($success))
-<x-layout.alert status="Success" message="{{$success}}" class="success" />
-@endif
+<x-layout.alert_handle />
 
 <form method="post" action="/email_template/{{ $emailTemplate->id }}">
     <x-form.btn_save />
     @csrf
     @method('PUT')
     <div class="row">
-        <div class="col-sm-6">
-            <label class="form-label">Campaing</label>
-            <select required class="form-control" id="campaign_id" name="campaign_id">
-                <option value="">Select</option>
-                @foreach($campaigns as $campaign)
-                <option {{$campaign->id == $emailTemplate->campaign_id ? 'selected' : null}} value="{{$campaign->id}}">{{$campaign->id}} | {{$campaign->name}}</option>
-                @endforeach
-            </select>
-        </div>
         <div class="col-sm-6">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" name="name" id="name" value="{{ $emailTemplate->name }}">

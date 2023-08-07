@@ -2,7 +2,8 @@
 
 namespace App\Mail;
 
-use App\Domain\Campaign\CampaignEmailMessageHandler;
+
+use App\Domain\Message\EmailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -18,7 +19,12 @@ class CampaignEmailMessage extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public CampaignEmailMessageHandler $campaignEmailMessageHandler)
+    public function __construct(
+        public int $contactListId,
+        public int $registers,
+        public int $messagePosition,
+        public EmailMessage $emailMessage
+        )
     {
     
     }
@@ -30,7 +36,7 @@ class CampaignEmailMessage extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME') ),
-            subject: $this->campaignEmailMessageHandler->subject,
+            subject: $this->emailMessage->subject,
         );
     }
 

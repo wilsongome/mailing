@@ -17,7 +17,7 @@ class ProcessCampaign implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public int $campaign_id)
+    public function __construct(public int $campaignId)
     {
         //
     }
@@ -27,7 +27,7 @@ class ProcessCampaign implements ShouldQueue
      */
     public function handle(): void
     {
-        $campaignHandler = new CampaignHandler($this->campaign_id);
+        $campaignHandler = new CampaignHandler($this->campaignId);
         $campaignHandler->execute();
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Domain\Campaign\CampaignHandler;
 use App\Domain\Campaign\CampaignStatus;
-use App\Jobs\ProcessCampaign;
 use App\Models\Campaign;
 use App\Models\ContactList;
 use Exception;
@@ -63,7 +62,7 @@ class CampaignController extends Controller
             $campaigns = $this->getAll();
             return view('campaign.index', ['campaigns' => $campaigns]);
         }catch(Exception $e){
-            return redirect()->route('campaign.list')->with('error','The objects can not be listed!');
+            return redirect()->route('campaign.index')->with('error','The objects can not be listed!');
         }
     }
 

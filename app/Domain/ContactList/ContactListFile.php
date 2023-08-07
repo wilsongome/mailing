@@ -18,7 +18,7 @@ class ContactListFile{
         try{
             $path = storage_path( $this->storagePath. $filePath);
             $lines = array_map('str_getcsv', file($path));
-            $headers = explode(";", $lines[0][0]);
+            $headers = explode(";", strtoupper($lines[0][0]));
             $i = -1;
             foreach($lines as $values){
                 $i++;
