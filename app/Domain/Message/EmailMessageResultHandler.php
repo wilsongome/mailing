@@ -64,7 +64,12 @@ class EmailMessageResultHandler{
 
         if($registers == $messagePosition){
             ContactListStatus::setStatus($contactList->id, 'STAND_BY');
-            CampaignStatus::toStandBy($contactList->campaign_id);
+            $campaignStandBy = CampaignStatus::toStandBy($contactList->campaign_id);
+        }
+
+        if($campaignStandBy){
+            $campaignHandler = new CampaignHandler($contactList->campaign_id);
+            $campaignHandler->saveHistory();
         }
 
         return true;
