@@ -27,10 +27,10 @@ class ContactListController extends Controller
     public function index()
     {
         try{
-            $contactLists = ContactList::all();
+            $contactLists = ContactList::with('emailTemplate')->get();
             return view('contact_list.index', ['contactLists' => $contactLists]);
         }catch(Exception $e){
-            return redirect()->route('contact_list.index')->with('error','The objects can not be listed!');
+            echo $e->getMessage();
         }
     }
 
