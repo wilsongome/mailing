@@ -6,9 +6,7 @@
 
 @section('content')
 
-@if(Session::has('success'))
-<x-layout.alert status="Success" message="{{Session::get('success')}}" class="success" />
-@endif
+<x-layout.alert_handle />
 
 <form enctype="multipart/form-data" method="post" action="{{route('contact_list.update', ['id' => $contactList->id])}}">
     <x-form.btn_save />

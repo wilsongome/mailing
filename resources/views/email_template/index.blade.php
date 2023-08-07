@@ -7,22 +7,15 @@
 
 @section('content')
 
-
-
-@if(session('error'))
-<x-layout.alert status="Error" message="{{session('error')}}" class="danger" />
-@endif
-@if(session('success'))
-<x-layout.alert status="Success" message="{{session('success')}}" class="success" />
-@endif
+<x-layout.alert_handle />
 
 <x-layout.btn_new route="{{ route('email_template.create') }}"/>
 
 <table class="table table-hover table-bordered table-sm">
+    <caption></caption>
     <thead>
         <tr>
             <th>#</th>
-            <th>Campaign</th>
             <th>Name</th>
             <th>Description</th>
             <th>Created</th>
@@ -34,7 +27,6 @@
         @foreach($emailTemplates as $emailTemplate)
         <tr>
             <td>{{$emailTemplate->id}}</td>
-            <td>{{$emailTemplate->id}}</td>
             <td>{{$emailTemplate->name}}</td>
             <td>{{$emailTemplate->description}}</td>
             <td>{{$emailTemplate->created_at}}</td>
@@ -44,10 +36,12 @@
                 </a>
             </td>
             <td>
-                <form method="post" action="/email_template/{{$emailTemplate->id}}"> 
+                <form method="post" action="/email_template/{{$emailTemplate->id}}">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn-delete"><i class="fas fa-trash-alt fa-lg" style="color: red"></i></button>
+                    <button type="submit" class="btn-delete">
+                        <i class="fas fa-trash-alt fa-lg" style="color: red"></i>
+                    </button>
                 </form>
             </td>
         </tr>

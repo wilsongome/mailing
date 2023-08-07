@@ -8,5 +8,11 @@ $(document).ready(function(){
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
-    })
+    });
+
+    $('.btn-process-campaign').click(function(event){
+        if(!confirm("Do you want to start sending?")){
+            event.preventDefault();
+        }
+    });
 });
