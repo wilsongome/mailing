@@ -21,4 +21,9 @@ class CampaignHistory{
         return true;
     }
 
+    public function findByCampaignId(int $campaignId)
+    {
+        return ModelsCampaignHistory::where('campaign_id', $campaignId)->get();
+    }
+
 }

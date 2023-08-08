@@ -2,6 +2,7 @@
 
 use App\Domain\Campaign\CampaignHandler;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\CampaignHistoryController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
 use Illuminate\Http\Request;
@@ -55,6 +56,10 @@ Route::controller(CampaignController::class)->group(function (){
     Route::delete('/campaign/{id}', 'destroy')->name('campaign.destroy');
     Route::get('/campaign/{id}/process', 'process')->name('campaign.process');
     Route::post('/campaign/{id}/processing', 'processing')->name('campaign.processing');
+});
+
+Route::controller(CampaignHistoryController::class)->group(function (){
+    Route::get('/campaign/{id}/history', 'index')->name('campaign.history');
 });
 
 Route::controller(EmailTemplateController::class)->group(function (){
