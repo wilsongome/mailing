@@ -28,8 +28,8 @@
         @foreach($contactLists as $contactList)
         <tr>
             <td>{{$contactList->id}}</td>
-            <td>{{$contactList->campaign_id}}</td>
-            <td>{{$contactList->email_template_id}}</td>
+            <td>{{$contactList->campaign->name}}</td>
+            <td>{{$contactList->emailTemplate->name}}</td>
             <td>{{$contactList->name}}</td>
             <td>{{$contactList->description}}</td>
             <td>{{$contactList->created_at}}</td>

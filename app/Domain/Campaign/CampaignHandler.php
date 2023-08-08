@@ -6,8 +6,8 @@ use App\Domain\ContactList\ContactListStatus;
 use App\Jobs\ProcessCampaign;
 use App\Models\Campaign;
 use App\Models\ContactList;
+use Carbon\Carbon;
 use Exception;
-use Monolog\Handler\IFTTTHandler;
 
 class CampaignHandler{
 
@@ -16,6 +16,43 @@ class CampaignHandler{
     public function __construct(int $campaignId)
     {
         $this->campaignId = $campaignId;
+    }
+
+    public function saveHistory(): void
+    {
+        try{
+            $data = [
+                'campaign_id' => $this->campaignId,
+                'process_data' => null,
+                'created_at' => null,
+                'updated_at' => null
+            ];
+            $processData = [];
+    
+            $contactLists = ContactList::where('campaign_id', $this->campaignId)
+            ->orderBy('updated_at')
+            ->get();
+    
+            $i = -1;
+            foreach($contactLists as $contactList){
+                $i++;
+                if($i == 0){
+                    $data['created_at'] = Carbon::parse($contactList->updated_at)->format('Y-m-d H:i:s');
+                }
+                $processData['contactLists'][$contactList->id]['name'] = $contactList->name;
+                $processData['contactLists'][$contactList->id]['registers'] = $contactList->registers;
+                $processData['contactLists'][$contactList->id]['processed_registers'] = $contactList->processed_registers;
+                $processData['contactLists'][$contactList->id]['file_name'] = $contactList->file_name;
+            }
+            $data['updated_at'] = Carbon::parse($contactList->updated_at)->format('Y-m-d H:i:s');
+            $data['process_data'] = json_encode($processData);
+            
+            $campaignHistory = new CampaignHistory();
+            $campaignHistory->store($data);
+        }catch(Exception $e){
+            throw new Exception('Error '.$e->getMessage());
+        }
+
     }
 
     public function validateExecute(): array

@@ -5,5 +5,8 @@
     <li class="nav-item">
         <a class="nav-link {{Route::currentRouteName() == 'campaign.process' ? 'active' : null}}" href="{{route('campaign.process', ['id' => $campaign])}}">Process</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link {{Route::currentRouteName() == 'campaign.history' ? 'active' : null}}" href="{{route('campaign.history', ['id' => $campaign])}}">History</a>
+    </li>
 </ul>
 <br>
