@@ -22,9 +22,14 @@ use function Psy\debug;
 |
 */
 
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
 Route::get('/', function () {
     return view('dashboard');
 });
+
 Route::get('/amq', function () {
     return view('amq');
 });

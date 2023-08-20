@@ -1,0 +1,368 @@
+[17] Log opened at 2023-08-20 02:46:03.123171
+[17] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[17] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[17] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[17] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[17] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[17] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[17] Log closed at 2023-08-20 02:46:03.445792
+
+[18] Log opened at 2023-08-20 02:46:41.482281
+[18] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[18] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[18] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[18] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[18] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[18] [Config] INFO: Trigger value for 'XDEBUG_SESSION' not found, so not activating
+[18] Log closed at 2023-08-20 02:46:41.804083
+
+[19] Log opened at 2023-08-20 02:46:52.518951
+[19] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[19] [Config] INFO: No shared secret: Activating
+[19] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[19] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[19] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="19" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[19] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[19] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[19] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[19] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[19] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[19] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 62
+[19] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="190001" resolved="unresolved"></response>
+
+[19] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[19] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="190002" resolved="unresolved"></response>
+
+[19] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[19] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="190003" resolved="unresolved"></response>
+
+[19] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[19] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="190004" resolved="unresolved"></response>
+
+[19] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[19] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="190005" resolved="unresolved"></response>
+
+[19] [Step Debug] <- run -i 11
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[19] [Step Debug] <- stop -i 12
+[19] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[19] Log closed at 2023-08-20 02:46:53.693723
+
+[20] Log opened at 2023-08-20 02:47:10.991627
+[20] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[20] [Config] INFO: No shared secret: Activating
+[20] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[20] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[20] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="20" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[20] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[20] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[20] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[20] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[20] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[20] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 63
+[20] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="200001" resolved="unresolved"></response>
+
+[20] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[20] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="200002" resolved="unresolved"></response>
+
+[20] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[20] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="200003" resolved="unresolved"></response>
+
+[20] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[20] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="200004" resolved="unresolved"></response>
+
+[20] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[20] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="200005" resolved="unresolved"></response>
+
+[20] [Step Debug] <- run -i 11
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[20] [Step Debug] <- stop -i 12
+[20] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[20] Log closed at 2023-08-20 02:47:11.498151
+
+[21] Log opened at 2023-08-20 02:52:04.219561
+[21] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[21] [Config] INFO: No shared secret: Activating
+[21] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[21] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[21] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="21" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[21] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[21] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[21] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[21] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[21] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[21] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 63
+[21] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="210001" resolved="unresolved"></response>
+
+[21] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[21] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="210002" resolved="unresolved"></response>
+
+[21] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[21] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="210003" resolved="unresolved"></response>
+
+[21] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[21] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="210004" resolved="unresolved"></response>
+
+[21] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[21] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="210005" resolved="unresolved"></response>
+
+[21] [Step Debug] <- run -i 11
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[21] [Step Debug] <- stop -i 12
+[21] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[21] Log closed at 2023-08-20 02:52:04.965521
+
+[22] Log opened at 2023-08-20 02:52:45.954936
+[22] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[22] [Config] INFO: No shared secret: Activating
+[22] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[22] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[22] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="22" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[22] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[22] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[22] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[22] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[22] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[22] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 63
+[22] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="220001" resolved="unresolved"></response>
+
+[22] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[22] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="220002" resolved="unresolved"></response>
+
+[22] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[22] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="220003" resolved="unresolved"></response>
+
+[22] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[22] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="220004" resolved="unresolved"></response>
+
+[22] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[22] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="220005" resolved="unresolved"></response>
+
+[22] [Step Debug] <- run -i 11
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[22] [Step Debug] <- stop -i 12
+[22] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[22] Log closed at 2023-08-20 02:52:46.852441
+
+[17] Log opened at 2023-08-20 02:54:19.526800
+[17] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[17] [Config] INFO: No shared secret: Activating
+[17] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[17] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[17] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="17" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[17] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 63
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="170001" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="170002" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="170003" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="170004" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="170005" resolved="unresolved"></response>
+
+[17] [Step Debug] <- run -i 11
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[17] [Step Debug] <- stop -i 12
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[17] Log closed at 2023-08-20 02:54:20.290330
+
+[17] Log opened at 2023-08-20 02:54:20.321358
+[17] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[17] [Config] INFO: No shared secret: Activating
+[17] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[17] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[17] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="17" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[17] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 63
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="170006" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="170007" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="170008" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="170009" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="170010" resolved="unresolved"></response>
+
+[17] [Step Debug] <- run -i 11
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[17] [Step Debug] <- stop -i 12
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[17] Log closed at 2023-08-20 02:54:21.186929
+
+[17] Log opened at 2023-08-20 02:54:23.876319
+[17] [Config] INFO: Trigger value for 'XDEBUG_TRIGGER' not found, falling back to 'XDEBUG_SESSION'
+[17] [Config] INFO: No shared secret: Activating
+[17] [Step Debug] INFO: Connecting to configured address/port: 172.27.211.87:9003.
+[17] [Step Debug] INFO: Connected to debugging client: 172.27.211.87:9003 (through xdebug.client_host/xdebug.client_port).
+[17] [Step Debug] -> <init xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" fileuri="file:///var/www/html/public/index.php" language="PHP" xdebug:language_version="8.2.9" protocol_version="1.0" appid="17" idekey="VSCODE"><engine version="3.2.2"><![CDATA[Xdebug]]></engine><author><![CDATA[Derick Rethans]]></author><url><![CDATA[https://xdebug.org]]></url><copyright><![CDATA[Copyright (c) 2002-2023 by Derick Rethans]]></copyright></init>
+
+[17] [Step Debug] <- feature_set -i 1 -n resolved_breakpoints -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="1" feature="resolved_breakpoints" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 2 -n notify_ok -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="2" feature="notify_ok" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 3 -n extended_properties -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="3" feature="extended_properties" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 4 -n breakpoint_include_return_value -v 1
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="4" feature="breakpoint_include_return_value" success="1"></response>
+
+[17] [Step Debug] <- feature_set -i 5 -n max_children -v 100
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="feature_set" transaction_id="5" feature="max_children" success="1"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 6 -t line -f file:///var/www/html/mailing/app/Http/Controllers/CampaignController.php -n 63
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Http/Controllers/CampaignController.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="6" id="170011" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 7 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 36
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="7" id="170012" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 8 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 50
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="8" id="170013" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 9 -t line -f file:///var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php -n 53
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/app/Domain/Campaign/CampaignHandler.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="9" id="170014" resolved="unresolved"></response>
+
+[17] [Step Debug] <- breakpoint_set -i 10 -t line -f file:///var/www/html/mailing/routes/web.php -n 25
+[17] [Step Debug] WARN: Breakpoint file name does not exist: /var/www/html/mailing/routes/web.php (No such file or directory).
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="breakpoint_set" transaction_id="10" id="170015" resolved="unresolved"></response>
+
+[17] [Step Debug] <- run -i 11
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="run" transaction_id="11" status="stopping" reason="ok"></response>
+
+[17] [Step Debug] <- stop -i 12
+[17] [Step Debug] -> <response xmlns="urn:debugger_protocol_v1" xmlns:xdebug="https://xdebug.org/dbgp/xdebug" command="stop" transaction_id="12" status="stopped" reason="ok"></response>
+
+[17] Log closed at 2023-08-20 02:54:24.423907
+
