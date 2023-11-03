@@ -8,7 +8,8 @@ services:
       context: .
       dockerfile: .docker/Dockerfile
     extra_hosts:
-      - "172.27.211.87:host-gateway"
+      #- "172.27.211.87:host-gateway"
+      - host.docker.internal:host-gateway
     networks:
       - my-networks
     image: 'ws-mailing:1.1'
