@@ -27,7 +27,7 @@ use function Psy\debug;
 
 Route::get('/', function () {
     return view('dashboard');
-})->middleware(Authenticator::class);
+})->name('home');
 
 Route::get('/amq', function () {
     return view('amq');
@@ -54,11 +54,12 @@ Route::get('/teste', function () {
 
 Route::get('/login',[AuthController::class, 'login'])->name("login");
 Route::post('/login',[AuthController::class, 'authenticate'])->name("login");
+Route::post('/logout',[AuthController::class, 'logout'])->name("logout");
 
 Route::controller(UserController::class)->group(function (){
     Route::get('/user', 'index')->name('user.index');
     Route::get('/user/create','create')->name("user.create");
-    Route::get('/user/{id}/edit','create')->name("user.edit");
+    Route::get('/user/{id}/edit','edit')->name("user.edit");
     Route::post('/user','store')->name("user.store");
     Route::match(['put', 'patch'],'/user/{id}', 'update')->name('user.update');
     Route::delete('/user/{id}','destroy')->name('user.destroy');
