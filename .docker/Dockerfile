@@ -2,10 +2,18 @@ FROM php:8.2-apache
 
 EXPOSE 8080
 
-USER root
+#Argumentos passados para o arquivo docker-compose.yml
+ARG user=user1
+ARG uid=1000
+
+# Create um usuário de sistema para executar os comandos do composer e php artisan
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
 WORKDIR /var/www/html
 
+#Install PHP libs
 RUN apt-get update && apt-get install -y \
         libpng-dev \
         zlib1g-dev \
@@ -22,10 +30,18 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install sockets \
     && docker-php-source delete
+
+#Instala e configura o PHP XDEBUG
+COPY .docker/90-xdebug.ini "${PHP_INI_DIR}/conf.d"
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
     
-
-COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
-
+#Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite
+#Configura apache
+COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
+
+#Configura permissões
+RUN chown -R www-data:www-data /var/www/html 

@@ -294,11 +294,11 @@ return [
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
         [
             'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
+            'topnav_right' => false,
         ],
 
         // Sidebar items:
@@ -314,7 +314,7 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => '/',
-            'icon'        => 'nav-icon fas fa-tachometer-alt',       
+            'icon'        => 'nav-icon fas fa-tachometer-alt',
             'label_color' => 'success',
         ],
         ['header' => 'CONFIG'],
@@ -335,16 +335,18 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Users',
+            'url'  => 'user',
             'icon' => 'fas fa-fw fa-user',
         ],
+
+           /*
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        /* [
+      [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
