@@ -1,10 +1,13 @@
 <?php
 
 use App\Domain\Campaign\CampaignHandler;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CampaignHistoryController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\Authenticator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -22,13 +25,9 @@ use function Psy\debug;
 |
 */
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
 Route::get('/', function () {
     return view('dashboard');
-});
+})->middleware(Authenticator::class);
 
 Route::get('/amq', function () {
     return view('amq');
@@ -52,16 +51,33 @@ Route::get('/teste', function () {
     echo "ok!";
 });
 
-Route::controller(CampaignController::class)->group(function (){
-    Route::get('/campaign', 'index')->name('campaign.index');
-    Route::get('/campaign/create', 'create')->name('campaign.create');
-    Route::get('/campaign/{id}/edit', 'edit')->name('campaign.edit');
-    Route::post('/campaign', 'store')->name('campaign.store');
-    Route::match(['put', 'patch'],'/campaign/{id}', 'update')->name('campaign.update');
-    Route::delete('/campaign/{id}', 'destroy')->name('campaign.destroy');
-    Route::get('/campaign/{id}/process', 'process')->name('campaign.process');
-    Route::post('/campaign/{id}/processing', 'processing')->name('campaign.processing');
+
+Route::get('/login',[AuthController::class, 'login'])->name("login");
+Route::post('/login',[AuthController::class, 'authenticate'])->name("login");
+
+Route::controller(UserController::class)->group(function (){
+    Route::get('/user', 'index')->name('user.index');
+    Route::get('/user/create','create')->name("user.create");
+    Route::get('/user/{id}/edit','create')->name("user.edit");
+    Route::post('/user','store')->name("user.store");
+    Route::match(['put', 'patch'],'/user/{id}', 'update')->name('user.update');
+    Route::delete('/user/{id}','destroy')->name('user.destroy');
 });
+
+Route::middleware(Authenticator::class)->group(function (){
+    Route::controller(CampaignController::class)->group(function (){
+        Route::get('/campaign', 'index')->name('campaign.index');
+        Route::get('/campaign/create', 'create')->name('campaign.create');
+        Route::get('/campaign/{id}/edit', 'edit')->name('campaign.edit');
+        Route::post('/campaign', 'store')->name('campaign.store');
+        Route::match(['put', 'patch'],'/campaign/{id}', 'update')->name('campaign.update');
+        Route::delete('/campaign/{id}', 'destroy')->name('campaign.destroy');
+        Route::get('/campaign/{id}/process', 'process')->name('campaign.process');
+        Route::post('/campaign/{id}/processing', 'processing')->name('campaign.processing');
+    });
+});
+
+
 
 Route::controller(CampaignHistoryController::class)->group(function (){
     Route::get('/campaign/{id}/history', 'index')->name('campaign.history');
