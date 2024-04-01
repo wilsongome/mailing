@@ -16,7 +16,7 @@ services:
     container_name: app
     restart: unless-stopped
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - ./:/var/www/html/mailing
     depends_on:
@@ -53,6 +53,7 @@ services:
     container_name: mailhog
     ports: 
       - "8025:8025"
+      - "1025:1025"
     networks:
       - my-networks
 networks:

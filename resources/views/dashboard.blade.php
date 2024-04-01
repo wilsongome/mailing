@@ -12,5 +12,5 @@
 
 
 @section('footer')
-    <strong>Developed by <a href="mailto:wilsongome@gmail.com">wilsongome@gmail.com</a></strong>
+    <strong>Developed by <a href="mailto:wilsongome@gmail.com">WG Tech</a></strong>
 @stop

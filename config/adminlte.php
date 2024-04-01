@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'layout_topnav' => true,
+    'layout_topnav' => false,
     'layout_boxed' => false,
     'layout_fixed_sidebar' => false,
     'layout_fixed_navbar' => false,
@@ -303,10 +303,6 @@ return [
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
@@ -317,25 +313,48 @@ return [
             'icon'        => 'nav-icon fas fa-tachometer-alt',
             'label_color' => 'success',
         ],
-        ['header' => 'CONFIG'],
+        ['header' => 'WHATSAPP'],
+        [
+            'text'       => 'Account',
+            'icon'        => 'nav-icon fas fa-building',
+            'icon_color' => 'red',
+            'url'        => 'wpaccount',
+        ],
+        [
+            'text'       => 'Chat',
+            'icon'        => 'nav-icon fas fa-comments',
+            'icon_color' => 'green',
+            'url'        => 'wpchat',
+        ],
+        [
+            'text'       => 'Bulk',
+            'icon'        => 'nav-icon fas fa-file-upload',
+            'icon_color' => 'cyan',
+            'url'        => 'wpbulk',
+        ],
+        ['header' => 'E-MAIL'],
         [
             'text'       => 'Campaigns',
+            'icon'       => 'nav-icon fas fa-bullhorn',
             'icon_color' => 'red',
             'url'        => 'campaign',
         ],
         [
             'text'       => 'E-mail Template',
+            'icon'        => 'nav-icon fas fa-envelope-open-text',
             'icon_color' => 'yellow',
             'url'        => 'email_template',
         ],
         [
             'text'       => 'Contact List',
+            'icon'        => 'nav-icon fas fa-file-upload',
             'icon_color' => 'cyan',
             'url'        => 'contact_list',
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'Users',
+            'icon' => 'nav-icon fas fa-user',
             'url'  => 'user',
             'icon' => 'fas fa-fw fa-user',
         ],

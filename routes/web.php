@@ -24,10 +24,11 @@ use function Psy\debug;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('dashboard');
-})->name('home');
+Route::middleware(Authenticator::class)->group(function (){
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('home');
+});
 
 Route::get('/amq', function () {
     return view('amq');
