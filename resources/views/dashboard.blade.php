@@ -8,6 +8,9 @@
 
 @section('content')
     <p>Welcome to this beautiful admin panel.</p>
+
+    <!-- <img src="<?php echo url('images/Frow.png'); ?>" /> -->
+
 @stop
 
 
