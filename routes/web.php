@@ -7,6 +7,9 @@ use App\Http\Controllers\CampaignHistoryController;
 use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WpAccountController;
+use App\Http\Controllers\WpMessageTemplateController;
+use App\Http\Controllers\WpNumberController;
 use App\Http\Middleware\Authenticator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -108,5 +111,38 @@ Route::middleware(Authenticator::class)->group(function (){
         Route::match(['put', 'patch'],'/contact_list/{id}', 'update')->name('contact_list.update');
         Route::delete('/contact_list/{id}', 'destroy')->name('contact_list.destroy');
         Route::get('/contact_list/{id}/download', 'download')->name('contact_list.download');
+    });
+});
+
+Route::middleware(Authenticator::class)->group(function (){
+    Route::controller(WpAccountController::class)->group(function (){
+        Route::get('/wpaccount', 'index')->name('wpaccount.index');
+        Route::get('/wpaccount/create', 'create')->name('wpaccount.create');
+        Route::get('/wpaccount/{id}/edit', 'edit')->name('wpaccount.edit');
+        Route::post('/wpaccount', 'store')->name('wpaccount.store');
+        Route::match(['put', 'patch'],'/wpaccount/{id}', 'update')->name('wpaccount.update');
+        Route::delete('/wpaccount/{id}', 'destroy')->name('wpaccount.destroy');
+    });
+});
+
+Route::middleware(Authenticator::class)->group(function (){
+    Route::controller(WpNumberController::class)->group(function (){
+        Route::get('/wpaccount/{id}/number', 'index')->name('wpnumber.index');
+        Route::get('/wpaccount/{wpAccountId}/number/create', 'create')->name('wpnumber.create');
+        Route::get('/wpaccount/{wpAccountId}/number/{id}/edit', 'edit')->name('wpnumber.edit');
+        Route::post('/wpaccount/{wpAccountId}/number', 'store')->name('wpnumber.store');
+        Route::match(['put', 'patch'],'/wpaccount/{wpAccountId}/number/{id}', 'update')->name('wpnumber.update');
+        Route::delete('/wpaccount/{wpAccountId}/number/{id}', 'destroy')->name('wpnumber.destroy');
+    });
+});
+
+Route::middleware(Authenticator::class)->group(function (){
+    Route::controller(WpMessageTemplateController::class)->group(function (){
+        Route::get('/wpaccount/{id}/msgtemplate', 'index')->name('wpmsgtemplate.index');
+        Route::get('/wpaccount/{id}/msgtemplate/create', 'create')->name('wpmsgtemplate.create');
+        Route::get('/wpaccount/{id}/msgtemplate/{id}/edit', 'edit')->name('wpmsgtemplate.edit');
+        Route::post('/wpaccount/{id}/msgtemplate', 'store')->name('wpmsgtemplate.store');
+        Route::match(['put', 'patch'],'/wpaccount/{id}/msgtemplate', 'update')->name('wpmsgtemplate.update');
+        Route::delete('/wpaccount/{id}/msgtemplate/{id}', 'destroy')->name('wpmsgtemplate.destroy');
     });
 });

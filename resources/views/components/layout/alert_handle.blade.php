@@ -3,5 +3,5 @@
 @endif
 
 @if(session('error'))
-<x-layout.alert status="Error" message="{{session('error')}}" class="error" />
+<x-layout.alert status="Error" message="{{session('error')}}" class="danger" />
 @endif
