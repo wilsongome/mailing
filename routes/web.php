@@ -138,11 +138,11 @@ Route::middleware(Authenticator::class)->group(function (){
 
 Route::middleware(Authenticator::class)->group(function (){
     Route::controller(WpMessageTemplateController::class)->group(function (){
-        Route::get('/wpaccount/{id}/msgtemplate', 'index')->name('wpmsgtemplate.index');
-        Route::get('/wpaccount/{id}/msgtemplate/create', 'create')->name('wpmsgtemplate.create');
-        Route::get('/wpaccount/{id}/msgtemplate/{id}/edit', 'edit')->name('wpmsgtemplate.edit');
-        Route::post('/wpaccount/{id}/msgtemplate', 'store')->name('wpmsgtemplate.store');
-        Route::match(['put', 'patch'],'/wpaccount/{id}/msgtemplate', 'update')->name('wpmsgtemplate.update');
-        Route::delete('/wpaccount/{id}/msgtemplate/{id}', 'destroy')->name('wpmsgtemplate.destroy');
+        Route::get('/wpaccount/{id}/messagetemplate', 'index')->name('wpmessagetemplate.index');
+        Route::get('/wpaccount/{wpAccountId}/messagetemplate/create', 'create')->name('wpmessagetemplate.create');
+        Route::get('/wpaccount/{wpAccountId}/messagetemplate/{id}/edit', 'edit')->name('wpmessagetemplate.edit');
+        Route::post('/wpaccount/{wpAccountId}/messagetemplate', 'store')->name('wpmessagetemplate.store');
+        Route::match(['put', 'patch'],'/wpaccount/{wpAccountId}/messagetemplate/{id}', 'update')->name('wpmessagetemplate.update');
+        Route::delete('/wpaccount/{wpAccountId}/messagetemplate/{id}', 'destroy')->name('wpmessagetemplate.destroy');
     });
 });

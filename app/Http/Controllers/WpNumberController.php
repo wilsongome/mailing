@@ -87,11 +87,12 @@ class WpNumberController extends Controller
     public function destroy(Request $request)
     {
         try{
+            $wpAccountId = (int) $request->wpAccountId;
             $wpNumber = WpNumber::find($request->id);
             $wpNumber->delete();
-            return redirect()->route('wpnumber.index')->with('success','Object deleted!');
+            return redirect()->route('wpnumber.index', $wpAccountId)->with('success','Object deleted!');
         }catch(Exception $e){
-            return redirect()->route('wpnumber.index')->with('error','The object can not be updated!');
+            return redirect()->route('wpnumber.index', $wpAccountId)->with('error','The object can not be updated!');
         }
     }
 }

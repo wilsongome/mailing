@@ -51,6 +51,7 @@ class WpAccountController extends Controller
             $wpAccount->name = $request->name;
             $wpAccount->external_id = $request->external_id;
             $wpAccount->description = $request->description;
+            $wpAccount->token = $request->token;
             $wpAccount->save();
             return redirect()->route('wpaccount.edit', ['id' => $wpAccount->id])->with('success','Object created!');
         }catch(Exception $e){
@@ -64,6 +65,7 @@ class WpAccountController extends Controller
             $wpAccount = WpAccount::find($request->id);
             $wpAccount->name = $request->name;
             $wpAccount->description = $request->description;
+            $wpAccount->token = $request->token;
             $wpAccount->save();
             return redirect()->route('wpaccount.edit', ['id' => $wpAccount->id])->with('success','Object updated!');
         }catch(Exception $e){

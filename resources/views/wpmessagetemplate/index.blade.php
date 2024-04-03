@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-    <h4>Whatsapp Account Numbers</h4>
+    <h4>Whatsapp Message Templates</h4>
 @stop
 
 
@@ -12,7 +12,7 @@
 
 <x-wpaccount.tabs wpaccount="{{ $wpAccountId }}" />
 
-<x-layout.btn_new route="{{ route('wpnumber.create', [$wpAccountId]) }}"/>
+<x-layout.btn_new route="{{ route('wpmessagetemplate.create', [$wpAccountId]) }}"/>
 
 <table class="table table-hover table-bordered table-sm">
     <caption></caption>
@@ -20,26 +20,26 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Number</th>
+            <th>Template</th>
             <th>Created</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($wpNumbers as $wpNumber)
+        @foreach($wpMessageTemplates as $wpMessageTemplate)
         <tr>
-            <td>{{$wpNumber->id}}</td>
-            <td>{{$wpNumber->name}}</td>
-            <td>{{$wpNumber->number}}</td>
-            <td>{{$wpNumber->created_at}}</td>
+            <td>{{$wpMessageTemplate->id}}</td>
+            <td>{{$wpMessageTemplate->name}}</td>
+            <td>{{$wpMessageTemplate->template}}</td>
+            <td>{{$wpMessageTemplate->created_at}}</td>
             <td>
-                <a href="{{ route('wpnumber.edit', [$wpAccountId, $wpNumber->id]) }}">
+                <a href="{{ route('wpmessagetemplate.edit', [$wpAccountId, $wpMessageTemplate->id]) }}">
                     <i class="fas fa-edit fa-lg" style="color: green"></i>
                 </a>
             </td>
             <td>
-                <form method="post" action="{{ route('wpnumber.destroy', [$wpAccountId, $wpNumber->id]) }}">
+                <form method="post" action="{{ route('wpmessagetemplate.destroy', [$wpAccountId, $wpMessageTemplate->id]) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn-delete">

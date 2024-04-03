@@ -32,12 +32,12 @@
             <td>{{$wpAccount->description}}</td>
             <td>{{$wpAccount->created_at}}</td>
             <td>
-                <a href="/wpaccount/{{$wpAccount->id}}/edit">
+                <a href="{{ route('wpaccount.edit', [$wpAccount->id]) }}">
                     <i class="fas fa-edit fa-lg" style="color: green"></i>
                 </a>
             </td>
             <td>
-                <form method="post" action="/wpaccount/{{$wpAccount->id}}">
+                <form method="post" action="{{ route('wpaccount.destroy', [$wpAccount->id]) }}">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn-delete">

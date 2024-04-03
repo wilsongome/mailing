@@ -33,6 +33,16 @@
         rows="3"></textarea>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <label class="form-label">Access Token</label>
+        <textarea
+        class="form-control"
+        name="token"
+        id="token"
+        rows="3"></textarea>
+        </div>
+    </div>
 </form>
 
 
