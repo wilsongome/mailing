@@ -33,6 +33,15 @@
             <input required type="text" class="form-control" name="external_id" id="external_id" value="{{ $wpMessageTemplate->external_id }}">
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <label class="form-label">Language</label>
+            <select class="form-control" name="language" id="language">
+                <option {{ $wpMessageTemplate->language == "pt_BR" ? "selected" : null }} value="pt_BR">Portuguese (BR)</option>
+                <option {{ $wpMessageTemplate->language == "en_US" ? "selected" : null }} value="en_US">English (US)</option>
+            </select>
+        </div>
+    </div>
 </form>
 
 

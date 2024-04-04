@@ -57,6 +57,7 @@ class WpMessageTemplateController extends Controller
             $wpMessageTemplate->external_id = $request->external_id;
             $wpMessageTemplate->name = $request->name;
             $wpMessageTemplate->template = $request->template;
+            $wpMessageTemplate->language = $request->language;
             $wpMessageTemplate->save();
 
             return redirect()->route('wpmessagetemplate.edit', [$wpAccountId, $wpMessageTemplate->id])->with('success','Object created!');
@@ -75,6 +76,7 @@ class WpMessageTemplateController extends Controller
             $wpMessageTemplate->external_id = $request->external_id;
             $wpMessageTemplate->name = $request->name;
             $wpMessageTemplate->template = $request->template;
+            $wpMessageTemplate->language = $request->language;
             $wpMessageTemplate->save();
 
             return redirect()->route('wpmessagetemplate.edit', [$wpAccountId, $id])->with('success','Object updated!');
