@@ -1,0 +1,17 @@
+        $wpAccount = new WpAccount();
+        $wpAccount->externalId = "1231231231";
+        $wpAccount->token = "EAANndVz5EJMBOZCMiqTAJahxDeElKm3ZAkZAcBnksJQvVQLXWjMacCwHzZB8iX2yVpMCSIoZCwCp1uZA5rRZCXNJsJqHVis2EzDhNvHPn01KDbTUtdCiefU84nUiFioYkrJRS8w3OAWB4LUglewMn8J63dAoQeCtIZBeHK5aK4aRLDkqWHx2ZAmZCAahmNlr6lGjKNWoYoVmEymMCO45ZB313QZD";
+        $wpNumber = new WpNumber();
+        $wpNumber->number = '+1 555 090 2559';
+        $wpNumber->externalId = "262216910312055";
+        $wpTemplate = new WpTemplate();
+        $wpTemplate->name = 'boas_vindas';
+        $wpTemplate->externalId = "234234234234";
+        $wpTemplate->language = 'pt_BR';
+        $destinationNumber = '5511989995982';
+
+        $message = new WpTemplateMessage($wpAccount, $wpNumber, $wpTemplate, $destinationNumber);
+        $sender = new WpTemplateMessageSender($message);
+        $response = $sender->send();
+
+        dd($response);
