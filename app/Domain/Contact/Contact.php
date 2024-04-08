@@ -7,6 +7,6 @@ class Contact{
     public $name;
     public $email;
     public $whatsappNumber;
-    public $smsNumber;
+    public $telephoneNumber;
 
 }

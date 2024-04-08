@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactListController;
 use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WpAccountController;
+use App\Http\Controllers\WpChatController;
 use App\Http\Controllers\WpMessageTemplateController;
 use App\Http\Controllers\WpNumberController;
 use App\Http\Middleware\Authenticator;
@@ -144,5 +145,16 @@ Route::middleware(Authenticator::class)->group(function (){
         Route::post('/wpaccount/{wpAccountId}/messagetemplate', 'store')->name('wpmessagetemplate.store');
         Route::match(['put', 'patch'],'/wpaccount/{wpAccountId}/messagetemplate/{id}', 'update')->name('wpmessagetemplate.update');
         Route::delete('/wpaccount/{wpAccountId}/messagetemplate/{id}', 'destroy')->name('wpmessagetemplate.destroy');
+    });
+});
+
+Route::middleware(Authenticator::class)->group(function (){
+    Route::controller(WpChatController::class)->group(function (){
+        Route::get('/wpchat', 'index')->name('wpchat.index');
+        Route::get('/wpchat/create', 'create')->name('wpchat.create');
+        Route::get('/wpchat/{id}', 'edit')->name('wpchat.edit');
+        Route::post('/wpchat', 'store')->name('wpchat.store');
+        Route::match(['put', 'patch'],'/wpchat{id}', 'update')->name('wpchat.update');
+        Route::delete('/wpchat/{id}', 'destroy')->name('wpchat.destroy');
     });
 });
