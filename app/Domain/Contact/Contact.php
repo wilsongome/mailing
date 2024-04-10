@@ -3,10 +3,10 @@ namespace App\Domain\Contact;
 
 class Contact{
 
-    public $id;
-    public $name;
-    public $email;
-    public $whatsappNumber;
-    public $telephoneNumber;
+    public int $id;
+    public string $name;
+    public string $email;
+    public string $whatsappNumber;
+    public string $telephoneNumber;
 
 }

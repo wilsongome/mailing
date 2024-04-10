@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('wp_messages', function (Blueprint $table) {
+        Schema::create('wp_messages', function (Blueprint $table) {
             $table->id('id');
             $table->bigInteger('wp_account_id');
             $table->bigInteger('wp_number_id');
             $table->bigInteger('wp_chat_id');
             $table->bigInteger('contact_id');
-            $table->string('wp_message_id', 100);
+            $table->string('wp_external_id', 100);
             $table->text('body');
             $table->string('message_status', 45)->nullable();
             $table->json('message_status_history')->nullable();
             $table->dateTime('send_time')->nullable();
             $table->string('direction', 3)->nullable();
             $table->string('user', 100)->nullable();
+            $table->string('type', 20)->nullable();
             $table->timestamps();
         });
     }

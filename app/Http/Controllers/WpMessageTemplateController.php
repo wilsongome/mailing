@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WpMessageTemplate;
+use App\Domain\Whatsapp\Template\WpMessageTemplate;
+use App\Models\WpMessageTemplate as WpMessageTemplateModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 
 class WpMessageTemplateController extends Controller
 {
+    public function find(int $wpMessageTemplateId) : WpMessageTemplate
+    {
+        $search = WpMessageTemplateModel::find($wpMessageTemplateId);
+        $wpMessageTemplate = new WpMessageTemplate(
+            $search->wp_account_id,
+            $search->external_id,
+            $search->name,
+            $search->template,
+            $search->language,
+        );
+        $wpMessageTemplate->id = $search->id;
+        return $wpMessageTemplate;
+    }
+
     public function getAll(int $wpAccountId): Collection
     {
-        return WpMessageTemplate::where('wp_account_id', $wpAccountId)->get();
+        return WpMessageTemplateModel::where('wp_account_id', $wpAccountId)->get();
     }
 
     public function index(Request $request)
@@ -36,7 +51,7 @@ class WpMessageTemplateController extends Controller
         try{
             $id = (int) $request->id;
             $wpAccountId = (int) $request->wpAccountId;
-            $wpMessageTemplate = WpMessageTemplate::find($id);
+            $wpMessageTemplate = WpMessageTemplateModel::find($id);
 
             if(!$wpMessageTemplate || !$wpMessageTemplate->id){
                 return redirect()->route('wpmessagetemplate.index', $wpAccountId)->with('error','Object not found!');
@@ -52,7 +67,7 @@ class WpMessageTemplateController extends Controller
     {
         try{
             $wpAccountId = (int) $request->wpAccountId;
-            $wpMessageTemplate = new WpMessageTemplate();
+            $wpMessageTemplate = new WpMessageTemplateModel();
             $wpMessageTemplate->wp_account_id = $wpAccountId;
             $wpMessageTemplate->external_id = $request->external_id;
             $wpMessageTemplate->name = $request->name;
@@ -71,7 +86,7 @@ class WpMessageTemplateController extends Controller
         try{
             $wpAccountId = (int) $request->wpAccountId;
             $id = (int) $request->id;
-            $wpMessageTemplate = WpMessageTemplate::find($id);
+            $wpMessageTemplate = WpMessageTemplateModel::find($id);
             $wpMessageTemplate->wp_account_id = $wpAccountId;
             $wpMessageTemplate->external_id = $request->external_id;
             $wpMessageTemplate->name = $request->name;
@@ -89,7 +104,7 @@ class WpMessageTemplateController extends Controller
     {
         try{
             $wpAccountId = (int) $request->wpAccountId;
-            $wpMessageTemplate = WpMessageTemplate::find($request->id);
+            $wpMessageTemplate = WpMessageTemplateModel::find($request->id);
             $wpMessageTemplate->delete();
             return redirect()->route('wpmessagetemplate.index', $wpAccountId)->with('success','Object deleted!');
         }catch(Exception $e){

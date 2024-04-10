@@ -30,10 +30,13 @@
         </div>
 
         <div class="card-footer">
+        <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="wpChatId" id="wpChatId" value="1" />
             <div class="input-group">
-                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <input type="text" id="message" name="message" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button onclick="sendTextMessage()" type="button" class="btn btn-primary">Send</button>
+                    <button onclick="sendTemplate()" type="button" class="btn btn-info">Send Template</button>
                 </span>
             </div>
         </div>

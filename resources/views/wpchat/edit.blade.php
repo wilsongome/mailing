@@ -6,6 +6,8 @@
 
 @section('content')
 
+<script type="text/javascript" src="{{asset('js/chat.js')}}"></script>
+
 <x-layout.alert_handle />
 
 <div class="row">

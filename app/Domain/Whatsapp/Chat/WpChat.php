@@ -1,13 +1,16 @@
 <?php
 namespace App\Domain\Whatsapp\Chat;
-
-use App\Domain\Contact\Contact;
-use App\Domain\Whatsapp\Account\WpAccount;
-use App\Domain\Whatsapp\Number\WpNumber;
+use DateTime;
 
 class WpChat{
 
-    public WpAccount $wpAccount;
-    public WpNumber $wpNumber;
-    public Contact $contact;
+    public int $id;
+    public int $wpAccountId;
+    public int $wpNumberId;
+    public int $contactId;
+    public DateTime $firstContactMessage;
+    public DateTime $lastContactMessage;
+    public string $status;
+    public string $createdBy;
+    
 }

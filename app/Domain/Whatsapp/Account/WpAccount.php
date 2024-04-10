@@ -5,6 +5,6 @@ class WpAccount{
     public int $id;
     public string $name;
     public string $externalId;
-    public string $descriptio;
+    public string $description;
     public string $token;
 }

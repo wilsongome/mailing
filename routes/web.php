@@ -9,6 +9,7 @@ use App\Http\Controllers\EmailTemplateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WpAccountController;
 use App\Http\Controllers\WpChatController;
+use App\Http\Controllers\WpMessageController;
 use App\Http\Controllers\WpMessageTemplateController;
 use App\Http\Controllers\WpNumberController;
 use App\Http\Middleware\Authenticator;
@@ -156,5 +157,11 @@ Route::middleware(Authenticator::class)->group(function (){
         Route::post('/wpchat', 'store')->name('wpchat.store');
         Route::match(['put', 'patch'],'/wpchat{id}', 'update')->name('wpchat.update');
         Route::delete('/wpchat/{id}', 'destroy')->name('wpchat.destroy');
+    });
+});
+
+Route::middleware(Authenticator::class)->group(function (){
+    Route::controller(WpMessageController::class)->group(function (){
+        Route::post('/wpmessage/send', 'send')->name('wpmessage.send');
     });
 });

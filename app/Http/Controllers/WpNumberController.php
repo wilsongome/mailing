@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WpNumber;
+use App\Domain\Whatsapp\Number\WpNumber;
+use App\Models\WpNumber as WpNumberModel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,9 +11,21 @@ use Illuminate\Database\Eloquent\Collection;
 class WpNumberController extends Controller
 {
 
+    public function find(int $wpNumberId) : WpNumber
+    {
+        $search = WpNumberModel::find($wpNumberId);
+        $wpNumber = new WpNumber();
+        $wpNumber->id = $search->id;
+        $wpNumber->wpAccountId = $search->wp_account_id;
+        $wpNumber->externalId = $search->external_id;
+        $wpNumber->name = $search->name;
+        $wpNumber->number = $search->number;
+        return $wpNumber;
+    }
+
     public function getAll(int $wpAccountId): Collection
     {
-        return WpNumber::where('wp_account_id', $wpAccountId)->get();
+        return WpNumberModel::where('wp_account_id', $wpAccountId)->get();
     }
 
     public function index(Request $request)
@@ -37,7 +50,7 @@ class WpNumberController extends Controller
         try{
             $id = (int) $request->id;
             $wpAccountId = (int) $request->wpAccountId;
-            $wpNumber = WpNumber::find($id);
+            $wpNumber = WpNumberModel::find($id);
 
             if(!$wpNumber || !$wpNumber->id){
                 return redirect()->route('wpnumber.index', $wpAccountId)->with('error','Object not found!');
@@ -53,7 +66,7 @@ class WpNumberController extends Controller
     {
         try{
             $wpAccountId = (int) $request->wpAccountId;
-            $wpNumber = new WpNumber();
+            $wpNumber = new WpNumberModel();
             $wpNumber->wp_account_id = $wpAccountId;
             $wpNumber->external_id = $request->external_id;
             $wpNumber->name = $request->name;
@@ -71,7 +84,7 @@ class WpNumberController extends Controller
         try{
             $wpAccountId = (int) $request->wpAccountId;
             $id = (int) $request->id;
-            $wpNumber = WpNumber::find($id);
+            $wpNumber = WpNumberModel::find($id);
             $wpNumber->wp_account_id = $wpAccountId;
             $wpNumber->external_id = $request->external_id;
             $wpNumber->name = $request->name;
@@ -88,7 +101,7 @@ class WpNumberController extends Controller
     {
         try{
             $wpAccountId = (int) $request->wpAccountId;
-            $wpNumber = WpNumber::find($request->id);
+            $wpNumber = WpNumberModel::find($request->id);
             $wpNumber->delete();
             return redirect()->route('wpnumber.index', $wpAccountId)->with('success','Object deleted!');
         }catch(Exception $e){

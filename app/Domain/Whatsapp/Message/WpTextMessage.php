@@ -6,7 +6,7 @@ use App\Domain\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Account\WpAccount;
 use App\Domain\Whatsapp\Number\WpNumber;
 
-class WpMessageSampleText extends WpMessage implements WpMessageInterface{
+class WpTextMessage extends WpMessage implements WpMessageInterface{
 
     public function __construct(
         WpAccount $wpAccount,
@@ -19,15 +19,15 @@ class WpMessageSampleText extends WpMessage implements WpMessageInterface{
         $this->contact = $contact;
         $this->body = $body;
     }
-    
 
-    public function save() : int
-    {
-        return 1;
-    }
 
     public function update(): bool
     {
         return true;
+    }
+
+    public function store() : int
+    {
+        return 1;
     }
 }
