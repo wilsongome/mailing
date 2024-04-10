@@ -8,18 +8,26 @@ use App\Domain\Whatsapp\Number\WpNumber;
 
 class WpMessageSampleText extends WpMessage implements WpMessageInterface{
 
-    public string $text;
-
     public function __construct(
         WpAccount $wpAccount,
         WpNumber $wpNumber,
         Contact $contact,
-        string $text)
+        string $body)
     {
         $this->wpAccount = $wpAccount;
         $this->wpNumber = $wpNumber;
         $this->contact = $contact;
-        $this->text = $text;
+        $this->body = $body;
     }
     
+
+    public function save() : int
+    {
+        return 1;
+    }
+
+    public function update(): bool
+    {
+        return true;
+    }
 }

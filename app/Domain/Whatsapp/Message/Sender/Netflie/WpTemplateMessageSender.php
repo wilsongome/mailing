@@ -2,12 +2,12 @@
 namespace App\Domain\Whatsapp\Message\Sender\Netflie;
 
 use App\Domain\Whatsapp\Message\Response\WpMessageResponse;
-use App\Domain\Whatsapp\Message\Sender\WpSender;
+use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
 use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use Netflie\WhatsAppCloudApi\Response;
 use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 
-class WpTemplateMessageSender extends Response implements WpSender{
+class WpTemplateMessageSender extends Response implements WpSenderInterface{
 
     private WpTemplateMessage $wpTemplateMessage;
 

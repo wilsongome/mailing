@@ -3,7 +3,7 @@ namespace App\Domain\Whatsapp\Message\Sender;
 
 use App\Domain\Whatsapp\Message\Response\WpMessageResponse;
 
-interface WpSender{
+interface WpSenderInterface{
 
     public function send() : WpMessageResponse;
 

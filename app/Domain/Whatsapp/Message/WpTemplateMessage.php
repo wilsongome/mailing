@@ -22,5 +22,15 @@ class WpTemplateMessage extends WpMessage implements WpMessageInterface{
         $this->wpTemplate = $wpTemplate;
         $this->contact = $contact;
     }
+
+    public function save() : int
+    {
+        return 1;
+    }
+
+    public function update(): bool
+    {
+        return true;
+    }
     
 }
