@@ -11,7 +11,7 @@ use Exception;
 use Netflie\WhatsAppCloudApi\Response;
 use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 
-class WpTemplateMessageSender extends Response implements WpSenderInterface{
+class WpTemplateMessageSender implements WpSenderInterface{
 
     private WpAccount $wpAccount;
     private WpNumber $wpNumber;
@@ -44,15 +44,17 @@ class WpTemplateMessageSender extends Response implements WpSenderInterface{
                 $this->wpTemplateMessage->wpTemplate->language
             );
         }catch(Exception $e){
-            return new WpMessageResponse(500, "", "error", $e->getMessage());
+            $httpStatusCode = $e->response()->httpStatusCode();
+            $message = $e->response()->decodedBody()["error"]["message"];
+            return new WpMessageResponse($httpStatusCode, "", "error", $message);
         }
         
 
         return new WpMessageResponse(
-            $response->http_status_code,
-            $response->decoded_body['messages'][0]['id'],
-            $response->decoded_body['messages'][0]['message_status'],
-            $response->body
+            $response->httpStatusCode(),
+            $response->decodedBody()['messages'][0]['id'],
+            $response->decodedBody()['messages'][0]['message_status'],
+            $response->body()
         );
 
     }

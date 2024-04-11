@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content_header')
-    <h4>Whatsapp Chat</h4>
+    <div class="row"></div>
 @stop
 
 @section('content')
@@ -17,7 +17,7 @@
                 <i class="far fa-paper-plane"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text">Frow Message</span>
+                <span class="info-box-text" id="system-name">{{ $wpNumber->name }}</span>
                 <span class="info-box-number">{{ $wpNumber->number }}</span>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 <i class="far fa-user"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text">{{ $contact->name }}</span>
+                <span class="info-box-text" id="contact-name">{{ $contact->name }}</span>
                 <span class="info-box-number">{{ $contact->whatsappNumber }}</span>
             </div>
         </div>
@@ -58,13 +58,13 @@
 
 </div>
 
-<form method="post" action="/wpchat/{{ $wpChat->id }}">
 
     @csrf
     @method('PUT')
 
     <x-wpchat.chat />
 
-</form>
+
+    <x-wpchat.templates :templates="$wpMessageTemplates" />
 
 @stop

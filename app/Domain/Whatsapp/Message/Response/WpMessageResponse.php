@@ -16,7 +16,7 @@ class WpMessageResponse{
     {
         $this->httpStatusCode = $httpStatusCode;
         $this->id = $id;
-        $this->messageStatus = $messageStatus;
+        $this->messageStatus = strtoupper($messageStatus);
         $this->responseBody = $responseBody;
     }
 

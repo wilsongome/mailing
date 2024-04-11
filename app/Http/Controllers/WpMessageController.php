@@ -6,12 +6,25 @@ use App\Domain\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Chat\WpChat;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\WpTemplateMessage;
+use App\Models\WpMessage;
 use DateTime;
 use Illuminate\Http\Request;
 use InvalidArgumentException;
 
 class WpMessageController extends Controller
 {
+    public function getMessagesByChat(int $wpChatId)
+    {
+        return WpMessage::where('wp_chat_id', $wpChatId)->get();
+    }
+
+
+    public function loadChatMessages(Request $request)
+    {
+        $messages = $this->getMessagesByChat($request->id);
+        return response()->json(["messages" => $messages],'200');
+    }
+
     private function buildTemplateMessage(WpChat $wpChat, int $wpTemplateId)
     {
         try{

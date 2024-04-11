@@ -82,12 +82,16 @@ class WpChatController extends Controller
             $wpNumberController = new WpNumberController();
             $wpNumber = $wpNumberController->find($wpChat->wpNumberId);
 
+            $wpMessageTemplateController = new WpMessageTemplateController();
+            $wpMessageTemplates = $wpMessageTemplateController->getAll($wpChat->wpAccountId);
+
             return view('wpchat.edit',
             [
                 'wpChat' => $wpChat,
                 'styleStatus' => $styleStatus,
                 'contact' => $contact,
-                'wpNumber' => $wpNumber
+                'wpNumber' => $wpNumber,
+                'wpMessageTemplates' => $wpMessageTemplates
             ]);
 
         }catch(Exception $e){
