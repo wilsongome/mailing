@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Mailing',
+    'title' => 'Frow',
     'title_prefix' => '',
     'title_postfix' => '',
 
