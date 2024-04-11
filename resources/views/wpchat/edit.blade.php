@@ -18,7 +18,7 @@
             </span>
             <div class="info-box-content">
                 <span class="info-box-text">Frow Message</span>
-                <span class="info-box-number">+15550902559</span>
+                <span class="info-box-number">{{ $wpNumber->number }}</span>
             </div>
         </div>
     </div>
@@ -28,52 +28,30 @@
                 <i class="far fa-user"></i>
             </span>
             <div class="info-box-content">
-                <span class="info-box-text">Wilson Gomes</span>
-                <span class="info-box-number">55 11 989995982</span>
+                <span class="info-box-text">{{ $contact->name }}</span>
+                <span class="info-box-number">{{ $contact->whatsappNumber }}</span>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
-            <span class="info-box-icon bg-success">
-                <i class="fas fa-sync-alt"></i>
+            <span class="info-box-icon {{ $styleStatus->class }}">
+                <i class="{{ $styleStatus->icon }}"></i>
             </span>
             <div class="info-box-content">
                 <span class="info-box-text">Status</span>
-                <span class="info-box-number">OPEN</span>
+                <span class="info-box-number">{{ $wpChat->status->name }}</span>
             </div>
         </div>
     </div>
     <div class="col-md-3 col-sm-6 col-12">
         <div class="info-box">
             <span class="info-box-icon bg-warning">
-                <i class="fas fa-comment-slash"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Status</span>
-                <span class="info-box-number">CLOSED</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-danger">
-                <i class="fas fa-ban"></i>
-            </span>
-            <div class="info-box-content">
-                <span class="info-box-text">Status</span>
-                <span class="info-box-number">FINISHED</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-primary">
                 <i class="far fa-clock"></i>
             </span>
             <div class="info-box-content">
                 <span class="info-box-text">Time to close</span>
-                <span class="info-box-number">10 Min</span>
+                <span class="info-box-number">{{ $wpChat->getMinutesToChatClosing() }} Min</span>
             </div>
         </div>
     </div>
