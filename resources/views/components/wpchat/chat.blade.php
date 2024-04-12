@@ -11,7 +11,7 @@
         <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
         <input type="hidden" name="wpChatId" id="wpChatId" value="1" />
             <div class="input-group">
-                <input type="text" id="message" name="message" placeholder="Type Message ..." class="form-control">
+                <input on type="text" id="textMessage" name="textMessage" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-append">
                     <button onclick="sendTextMessage()" type="button" class="btn btn-success">Send Message</button>
                     <button onclick="" type="button" class="btn btn-info" data-toggle="modal" data-target="#messageTemplates">Send Template</button>

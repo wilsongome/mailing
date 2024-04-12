@@ -1,11 +1,9 @@
 <?php
 namespace App\Domain\Whatsapp\Message;
 
-use App\Domain\Contact\Contact;
-use App\Domain\Whatsapp\Account\WpAccount;
-use App\Domain\Whatsapp\Chat\WpChat;
-use App\Domain\Whatsapp\Number\WpNumber;
+use App\Models\WpMessage as WpMessageModel;
 use DateTime;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class WpMessage{
 
@@ -29,6 +27,31 @@ abstract class WpMessage{
         $this->wpNumberId = $wpNumberId;
         $this->contactId = $contactId;
         $this->wpChatId = $wpChatId;
+    }
+
+    public function getModel() : Model
+    {
+            if(isset($this->id) && $this->id > 0){
+                $wpMessageModel = WpMessageModel::find($this->id);
+            }
+            if(!isset($this->id)){
+                $wpMessageModel = new WpMessageModel();
+            }
+            
+            $wpMessageModel->wp_account_id = $this->wpAccountId;
+            $wpMessageModel->wp_number_id = $this->wpNumberId;
+            $wpMessageModel->contact_id = $this->contactId;
+            $wpMessageModel->wp_chat_id = $this->wpChatId;
+            $wpMessageModel->wp_external_id = $this->wpExternalId;
+            $wpMessageModel->body = $this->body;
+            $wpMessageModel->message_status = $this->messageStatus;
+            $wpMessageModel->message_status_history = $this->messageStatusHistory;
+            $wpMessageModel->send_time = $this->sendTime->format("Y-m-d H:i:s");
+            $wpMessageModel->direction = $this->direction;
+            $wpMessageModel->user = $this->user;
+            $wpMessageModel->type = $this->type;
+
+            return $wpMessageModel;
     }
 
 }

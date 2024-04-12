@@ -1,33 +1,55 @@
 <?php
 namespace App\Domain\Whatsapp\Message;
-
-use App\Domain\Contact\Contact;
 use App\Domain\Message\WpMessageInterface;
-use App\Domain\Whatsapp\Account\WpAccount;
-use App\Domain\Whatsapp\Number\WpNumber;
+use Exception;
+use InvalidArgumentException;
 
-class WpTextMessage extends WpMessage implements WpMessageInterface{
+class WpTextMessage extends WpMessage{
 
     public function __construct(
-        WpAccount $wpAccount,
-        WpNumber $wpNumber,
-        Contact $contact,
+        int $wpAcoountId,
+        int $wpNumberId,
+        int $contactId,
+        int $wpChatId,
         string $body)
     {
-        $this->wpAccount = $wpAccount;
-        $this->wpNumber = $wpNumber;
-        $this->contact = $contact;
+        $this->wpAccountId = $wpAcoountId;
+        $this->wpNumberId = $wpNumberId;
+        $this->contactId = $contactId;
+        $this->wpChatId = $wpChatId;
         $this->body = $body;
+        $this->type = "text";
     }
 
 
     public function update(): bool
     {
-        return true;
+        try{
+            $result = false;
+            if(!isset($this->id)){
+                throw new InvalidArgumentException("messageId is required");
+            }
+            $model = $this->getModel();
+            $model->update();
+            $result = true;
+        }catch(InvalidArgumentException $e){
+            echo $e->getMessage();
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+
+        return $result;
     }
 
     public function store() : int
     {
-        return 1;
+        try{
+            $model = $this->getModel();
+            $model->save();
+            return $model->id;
+        }catch(Exception $e){
+            echo $e->getMessage();
+            return 0;
+        }
     }
 }

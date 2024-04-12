@@ -52,7 +52,7 @@ function sendTextMessage()
         _token: document.getElementById('_token').value,
         messageType: 'text',
         wpChatId: document.getElementById('wpChatId').value,
-        message: document.getElementById('message').value, 
+        message: document.getElementById('textMessage').value, 
     }
 
     send(postObj);
