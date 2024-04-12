@@ -1,5 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(e) {
+
     loadMessages();
+
+    document.getElementById('textMessage').addEventListener("keypress",
+        function (event){
+            if (event.key === "Enter") {
+                document.getElementById("btnSendTextMessage").click();
+            }
+        }
+    );
 
 });
 
@@ -56,6 +65,8 @@ function sendTextMessage()
     }
 
     send(postObj);
+
+    document.getElementById('textMessage').value = "";
 }
 
 function buildMessage(message, systemName, contactName)
@@ -121,6 +132,3 @@ function loadMessages()
 
     }
 }
-
-
-

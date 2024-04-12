@@ -515,7 +515,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => env('APP_URL').'/js/init.js',
+                    'location' => asset('/js/init.js'),
                 ],
             ],
         ],

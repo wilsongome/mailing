@@ -13,8 +13,8 @@
             <div class="input-group">
                 <input on type="text" id="textMessage" name="textMessage" placeholder="Type Message ..." class="form-control">
                 <span class="input-group-append">
-                    <button onclick="sendTextMessage()" type="button" class="btn btn-success">Send Message</button>
-                    <button onclick="" type="button" class="btn btn-info" data-toggle="modal" data-target="#messageTemplates">Send Template</button>
+                    <button id="btnSendTextMessage" onclick="sendTextMessage()" type="button" class="btn btn-success">Send Message</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#messageTemplates">Send Template</button>
                 </span>
             </div>
         </div>
