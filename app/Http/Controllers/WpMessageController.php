@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Message\WpMessageInterface;
+
 use App\Domain\Whatsapp\Chat\WpChat;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTextMessageSender;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
-use App\Domain\Whatsapp\Message\WpMessageInterface as MessageWpMessageInterface;
+use App\Domain\Whatsapp\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use App\Domain\Whatsapp\Message\WpTextMessage;
 use App\Jobs\WpMessageSenderJob;
@@ -79,7 +79,7 @@ class WpMessageController extends Controller
         }
     }
 
-    private function dispatch(MessageWpMessageInterface $message, WpSenderInterface $sender) : void
+    private function dispatch(WpMessageInterface $message, WpSenderInterface $sender) : void
     {
         WpMessageSenderJob::dispatch($message, $sender)->onQueue('wp_message_send');
     }

@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     );
 
+    var intervalID = window.setInterval(loadMessages, 5000);
+
 });
 
 function showTemplateExample(id)
@@ -121,7 +123,7 @@ function loadMessages()
             const jsonResponse = xhr.response;
             var messages = "";
             for(const key in jsonResponse.messages){
-                //console.log(jsonResponse.messages[key])
+                console.log(jsonResponse.messages[key])
                 messages += buildMessage(jsonResponse.messages[key], systemName, contactName);
 
             }
