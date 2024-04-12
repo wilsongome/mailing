@@ -12,7 +12,7 @@ abstract class WpMessage{
     public int $wpNumberId;
     public int $wpChatId;
     public int $contactId;
-    public string $wpExternalId;
+    public ?string $wpExternalId;
     public string $body;
     public string $messageStatus;
     public string $messageStatusHistory;
@@ -37,12 +37,15 @@ abstract class WpMessage{
             if(!isset($this->id)){
                 $wpMessageModel = new WpMessageModel();
             }
+
+            if(isset($this->wpExternalId)){
+                $wpMessageModel->wp_external_id = $this->wpExternalId;
+            }
             
             $wpMessageModel->wp_account_id = $this->wpAccountId;
             $wpMessageModel->wp_number_id = $this->wpNumberId;
             $wpMessageModel->contact_id = $this->contactId;
             $wpMessageModel->wp_chat_id = $this->wpChatId;
-            $wpMessageModel->wp_external_id = $this->wpExternalId;
             $wpMessageModel->body = $this->body;
             $wpMessageModel->message_status = $this->messageStatus;
             $wpMessageModel->message_status_history = $this->messageStatusHistory;

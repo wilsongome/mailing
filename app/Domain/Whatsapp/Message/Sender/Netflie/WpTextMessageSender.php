@@ -52,7 +52,7 @@ class WpTextMessageSender implements WpSenderInterface{
         return new WpMessageResponse(
             $response->httpStatusCode(),
             $response->decodedBody()['messages'][0]['id'],
-            'ACCEPTED',
+            'accepted',
             $response->body()
         );
 

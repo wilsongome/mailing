@@ -1,5 +1,5 @@
 <?php
-namespace App\Domain\Message;
+namespace App\Domain\Whatsapp\Message;
 
 interface WpMessageInterface{
 

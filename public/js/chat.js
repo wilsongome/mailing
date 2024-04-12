@@ -90,7 +90,7 @@ function buildMessage(message, systemName, contactName)
     htmlMessage += '<div class="direct-chat-msg'+msgAlign+'"'+margin+'>';
     htmlMessage += '<div class="direct-chat-infos clearfix">';
     htmlMessage += '<span class="direct-chat-name float-'+floatName+'">'+name+'</span>';
-    htmlMessage += '<span class="direct-chat-timestamp float-'+floatTime+'">'+message.send_time+'</span>';
+    htmlMessage += '<span class="direct-chat-timestamp float-'+floatTime+'">('+message.message_status+') '+message.send_time+'</span>';
     htmlMessage += '</div>';
     htmlMessage += userIcon;
     htmlMessage += '<div class="direct-chat-text">';

@@ -1,10 +1,9 @@
 <?php
 namespace App\Domain\Whatsapp\Message;
-use App\Domain\Message\WpMessageInterface;
 use Exception;
 use InvalidArgumentException;
 
-class WpTextMessage extends WpMessage{
+class WpTextMessage extends WpMessage implements WpMessageInterface{
 
     public function __construct(
         int $wpAcoountId,

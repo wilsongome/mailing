@@ -1,13 +1,11 @@
 <?php
 namespace App\Domain\Whatsapp\Message;
 
-use App\Domain\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Template\WpMessageTemplate;
-use App\Models\WpMessage as WpMessageModel;
 use Exception;
 use InvalidArgumentException;
 
-class WpTemplateMessage extends WpMessage{
+class WpTemplateMessage extends WpMessage implements WpMessageInterface{
 
     public WpMessageTemplate $wpTemplate;
 

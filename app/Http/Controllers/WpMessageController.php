@@ -6,8 +6,11 @@ use App\Domain\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Chat\WpChat;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTextMessageSender;
+use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
+use App\Domain\Whatsapp\Message\WpMessageInterface as MessageWpMessageInterface;
 use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use App\Domain\Whatsapp\Message\WpTextMessage;
+use App\Jobs\WpMessageSenderJob;
 use App\Models\WpMessage;
 use DateTime;
 use Illuminate\Http\Request;
@@ -76,6 +79,11 @@ class WpMessageController extends Controller
         }
     }
 
+    private function dispatch(MessageWpMessageInterface $message, WpSenderInterface $sender) : void
+    {
+        WpMessageSenderJob::dispatch($message, $sender)->onQueue('wp_message_send');
+    }
+
     public function send(Request $request)
     {
         $message = null;
@@ -94,7 +102,7 @@ class WpMessageController extends Controller
         $contact = $contactController->find($wpChat->contactId);
 
         $message = null;
-        
+
         if($request->messageType == "template"){
             $message = $this->buildTemplateMessage($wpChat, $request->wpMessageTemplateId);
             $sender = new WpTemplateMessageSender($wpAccount, $wpNumber, $contact, $message);
@@ -109,23 +117,23 @@ class WpMessageController extends Controller
             return false;
         }
         
-        $response = $sender->send();
-        $message->wpExternalId = $response->id();
-        $message->messageStatus = $response->messageStatus();
+        $message->messageStatus = 'waiting';
         $message->messageStatusHistory = json_encode([
-            date("Y-m-d H:i:s") => 'waiting',
-            date("Y-m-d H:i:s") => $response->messageStatus()
+            date("Y-m-d H:i:s") => 'waiting'
         ]);
 
         $messageId = $message->store();
+        $message->id = $messageId;
+
+        $this->dispatch($message, $sender);
         
         return response()->json(
             [
                 "id" => $messageId,
-                "external_id" => $response->id(),
-                "status" => $response->messageStatus()
+                "external_id" => null,
+                "status" => $message->messageStatus
             ],
-            $response->httpStatusCode()
+            200
         );
 
     }
