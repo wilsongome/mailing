@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     );
 
-    var intervalID = window.setInterval(loadMessages, 5000);
+    //var intervalID = window.setInterval(loadMessages, 5000);
 
 });
 
@@ -69,6 +69,12 @@ function sendTextMessage()
     send(postObj);
 
     document.getElementById('textMessage').value = "";
+}
+
+function sendDocumentMessage()
+{
+    const form = document.getElementById('formDocumentMessage');
+    form.submit();
 }
 
 function buildMessage(message, systemName, contactName)

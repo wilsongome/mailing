@@ -9,6 +9,7 @@ use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use App\Domain\Whatsapp\Number\WpNumber;
 use Exception;
 use Netflie\WhatsAppCloudApi\Response;
+use Netflie\WhatsAppCloudApi\Response\ResponseException;
 use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 
 class WpTemplateMessageSender implements WpSenderInterface{
@@ -43,7 +44,7 @@ class WpTemplateMessageSender implements WpSenderInterface{
                 $this->wpTemplateMessage->wpTemplate->name,
                 $this->wpTemplateMessage->wpTemplate->language
             );
-        }catch(Exception $e){
+        }catch(ResponseException $e){
             $httpStatusCode = $e->response()->httpStatusCode();
             $message = $e->response()->decodedBody()["error"]["message"];
             return new WpMessageResponse($httpStatusCode, "", "error", $message);

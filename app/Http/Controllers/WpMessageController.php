@@ -1,12 +1,13 @@
 <?php
-
 namespace App\Http\Controllers;
 
-
 use App\Domain\Whatsapp\Chat\WpChat;
+use App\Domain\Whatsapp\Document\WpDocument;
+use App\Domain\Whatsapp\Message\Sender\Netflie\WpDocumentMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTextMessageSender;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
+use App\Domain\Whatsapp\Message\WpDocumentMessage;
 use App\Domain\Whatsapp\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use App\Domain\Whatsapp\Message\WpTextMessage;
@@ -28,6 +29,27 @@ class WpMessageController extends Controller
     {
         $messages = $this->getMessagesByChat($request->id);
         return response()->json(["messages" => $messages],'200');
+    }
+
+    private function buildDocumentMessage(WpChat $wpChat, WpDocument $wpDocument, string $textMessage)
+    {
+        try{
+
+            $wpDocumentMessage = new WpDocumentMessage(
+                $wpChat->wpAccountId,
+                $wpChat->wpNumberId,
+                $wpChat->wpAccountId,
+                $wpChat->id,
+                $wpDocument
+            );
+            $wpDocumentMessage->body = $textMessage;
+            $wpDocumentMessage->sendTime = new DateTime();
+            $wpDocumentMessage->direction = "OUT";
+            $wpDocumentMessage->user = "Frow";
+            return $wpDocumentMessage;
+        }catch(InvalidArgumentException $e){
+            echo $e->getMessage();
+        }
     }
 
     private function buildTemplateMessage(WpChat $wpChat, int $wpTemplateId)
@@ -113,6 +135,13 @@ class WpMessageController extends Controller
             $sender = new WpTextMessageSender($wpAccount, $wpNumber, $contact, $message);
         }
 
+        if($request->messageType == "document"){
+            $wpDocument = new WpDocument($wpChat->id, 0);
+            $wpDocument->upload($request->file('documentMessageFile'));
+            $message = $this->buildDocumentMessage($wpChat, $wpDocument, $request->documentMessageCaption);
+            $sender = new WpDocumentMessageSender($wpAccount, $wpNumber, $contact, $message);
+        }
+
         if(!$sender || !$message){
             return false;
         }
@@ -126,6 +155,10 @@ class WpMessageController extends Controller
         $message->id = $messageId;
 
         $this->dispatch($message, $sender);
+
+        if($request->messageType == "document"){
+            return redirect()->route('wpchat.edit',['id'=>$wpChat->id]);
+        }
         
         return response()->json(
             [

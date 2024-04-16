@@ -8,12 +8,17 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" class="form-control" name="documentMessageCaption" id="documentMessageCaption" placeholder="Type a message" />
-        <input type="file" class="form-control" name="documentMessageFile" id="documentMessageFile" />
+        <form id="formDocumentMessage" method="post" enctype="multipart/form-data" action="{{route('wpmessage.send')}}">
+          @csrf
+          <input type="hidden" name="wpChatId" value="1" />
+          <input type="hidden" name="messageType" value="document" />
+          <input type="text" class="form-control" name="documentMessageCaption" id="documentMessageCaption" placeholder="Type a message" />
+          <input type="file" class="form-control" name="documentMessageFile" id="documentMessageFile" />
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button onclick="sendDocument()" type="button" class="btn btn-success">Send Message</button>
+        <button onclick="sendDocumentMessage()" type="button" class="btn btn-success">Send Message</button>
       </div>
     </div>
   </div>

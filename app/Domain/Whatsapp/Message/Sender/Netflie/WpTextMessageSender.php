@@ -5,10 +5,10 @@ use App\Domain\Contact\Contact;
 use App\Domain\Whatsapp\Account\WpAccount;
 use App\Domain\Whatsapp\Message\Response\WpMessageResponse;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
-use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use App\Domain\Whatsapp\Message\WpTextMessage;
 use App\Domain\Whatsapp\Number\WpNumber;
 use Exception;
+use Netflie\WhatsAppCloudApi\Response\ResponseException;
 use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 
 class WpTextMessageSender implements WpSenderInterface{
@@ -42,7 +42,7 @@ class WpTextMessageSender implements WpSenderInterface{
                 $this->contact->whatsappNumber,
                 $this->wpTextMessage->body
             );
-        }catch(Exception $e){
+        }catch(ResponseException $e){
             $httpStatusCode = $e->response()->httpStatusCode();
             $message = $e->response()->decodedBody()["error"]["message"];
             return new WpMessageResponse($httpStatusCode, "", "error", $message);
