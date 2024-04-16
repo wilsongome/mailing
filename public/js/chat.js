@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     );
 
-    var intervalID = window.setInterval(loadMessages, 5000);
+    //var intervalID = window.setInterval(loadMessages, 5000);
 
 });
 
@@ -95,6 +95,7 @@ function buildMessage(message, systemName, contactName)
     }
    
     let htmlMessage = '';
+
     htmlMessage += '<div class="direct-chat-msg'+msgAlign+'"'+margin+'>';
     htmlMessage += '<div class="direct-chat-infos clearfix">';
     htmlMessage += '<span class="direct-chat-name float-'+floatName+'">'+name+'</span>';
@@ -102,6 +103,9 @@ function buildMessage(message, systemName, contactName)
     htmlMessage += '</div>';
     htmlMessage += userIcon;
     htmlMessage += '<div class="direct-chat-text">';
+    if(message.type =="document"){
+        htmlMessage += '<a href="../wpmessage/chat/'+message.wp_chat_id+'/document/'+message.wp_document.id+'"><span class="badge badge-info"><i class="far fa-file"></i> '+ message.wp_document.local_file_name + '</span></a><br>'
+    }
     htmlMessage += message.body;
     htmlMessage += '</div>';
     htmlMessage += '</div>'; 

@@ -14,7 +14,7 @@
                 <button id="btnSendTextMessage" onclick="sendTextMessage()" type="button" class="btn btn-success">
                 Send Message
                 </button>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#messageTemplates">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#messageTemplates">
                     Send Template
                 </button>
             </span>

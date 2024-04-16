@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class WpDocument extends Model
 {
     use HasFactory;
+
 }

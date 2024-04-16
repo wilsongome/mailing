@@ -15,13 +15,20 @@ use App\Jobs\WpMessageSenderJob;
 use App\Models\WpMessage;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use InvalidArgumentException;
 
 class WpMessageController extends Controller
 {
+    public function documentDownload(Request $request)
+    {
+        $wpDocument = new WpDocument($request->chatId, $request->id);
+        return Storage::download($wpDocument->localFilePath, $wpDocument->localFileName);
+    }
+
     public function getMessagesByChat(int $wpChatId)
     {
-        return WpMessage::where('wp_chat_id', $wpChatId)->get();
+        return WpMessage::with('wpDocument')->where('wp_chat_id', $wpChatId)->get();
     }
 
 
