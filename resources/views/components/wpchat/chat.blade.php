@@ -7,6 +7,9 @@
     <input tabindex="-1" type="hidden" name="wpChatId" id="wpChatId" value="1" />
         <div class="input-group">
             <input on type="text" id="textMessage" name="textMessage" placeholder="Type a Message" class="form-control">
+            <button class="btn btn-default btn-file" data-toggle="modal" data-target="#messageDocuments">
+                <i class="fas fa-paperclip"></i>
+            </button>
             <span class="input-group-append">
                 <button id="btnSendTextMessage" onclick="sendTextMessage()" type="button" class="btn btn-success">
                 Send Message

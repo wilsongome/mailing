@@ -67,4 +67,6 @@
 
     <x-wpchat.templates :templates="$wpMessageTemplates" />
 
+    <x-wpchat.documents />
+
 @stop
