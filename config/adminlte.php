@@ -150,9 +150,9 @@ return [
 
     'layout_topnav' => false,
     'layout_boxed' => false,
-    'layout_fixed_sidebar' => false,
-    'layout_fixed_navbar' => false,
-    'layout_fixed_footer' => false,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
+    'layout_fixed_footer' => true,
     'layout_dark_mode' => false,
 
     /*
