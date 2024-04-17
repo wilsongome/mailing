@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     );
 
-    //var intervalID = window.setInterval(loadMessages, 5000);
+    var intervalID = window.setInterval(loadMessages, 5000);
 
 });
 

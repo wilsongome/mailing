@@ -49,7 +49,7 @@ class WpMessageController extends Controller
                 $wpChat->id,
                 $wpDocument
             );
-            $wpDocumentMessage->body = $textMessage;
+            $wpDocumentMessage->body = $textMessage ?? "";
             $wpDocumentMessage->sendTime = new DateTime();
             $wpDocumentMessage->direction = "OUT";
             $wpDocumentMessage->user = "Frow";
@@ -145,7 +145,7 @@ class WpMessageController extends Controller
         if($request->messageType == "document"){
             $wpDocument = new WpDocument($wpChat->id, 0);
             $wpDocument->upload($request->file('documentMessageFile'));
-            $message = $this->buildDocumentMessage($wpChat, $wpDocument, $request->documentMessageCaption);
+            $message = $this->buildDocumentMessage($wpChat, $wpDocument, $request->documentMessageCaption ?? "");
             $sender = new WpDocumentMessageSender($wpAccount, $wpNumber, $contact, $message);
         }
 
