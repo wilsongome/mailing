@@ -144,13 +144,14 @@ class WpMessageController extends Controller
 
         if($request->messageType == "document"){
             $wpDocument = new WpDocument($wpChat->id, 0);
-            $wpDocument->upload($request->file('documentMessageFile'));
-            $message = $this->buildDocumentMessage($wpChat, $wpDocument, $request->documentMessageCaption ?? "");
-            $sender = new WpDocumentMessageSender($wpAccount, $wpNumber, $contact, $message);
+            if($wpDocument->upload($request->file('documentMessageFile'))){
+                $message = $this->buildDocumentMessage($wpChat, $wpDocument, $request->documentMessageCaption ?? "");
+                $sender = new WpDocumentMessageSender($wpAccount, $wpNumber, $contact, $message);
+            }
         }
 
         if(!$sender || !$message){
-            return false;
+            return redirect()->route('wpchat.edit',['id'=>$wpChat->id])->withErrors("Error!");
         }
         
         $message->messageStatus = 'waiting';

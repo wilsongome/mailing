@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-    <h4>Whatsapp Accounts</h4>
+<x-layout.page_header pageTitle="Whatsapp Accounts" />
 @stop
 
 

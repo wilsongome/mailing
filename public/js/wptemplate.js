@@ -1,54 +1,33 @@
 
 function handleHeaderParameter(selectedValue)
 {
+    let mediaFileObject = document.getElementById("mediaFile");
+    let staticHeaderValueObject = document.getElementById("staticHeaderValue");
+
     if(selectedValue == "text"){
-        document.getElementById("staticHeaderValue").disabled = false;
+        staticHeaderValueObject.disabled = false;
+        mediaFileObject.disabled = true;
     }
 
     if(selectedValue != "text"){
-        document.getElementById("staticHeaderValue").disabled = true;
+        staticHeaderValueObject.disabled = true;
+        staticHeaderValueObject.value = "";
+        mediaFileObject.disabled = false;
     }
 }
 
 function handleParameter()
 {
-    let typeObject = document.getElementById("parameterType");
     let dataFromObject = document.getElementById("parameterDataFrom");
-    let dataTypeObject = document.getElementById("parameterDataType");
-
     let staticParameterValueObject = document.getElementById("staticParameterValue");
-    let mediaFileObject = document.getElementById("mediaFile");
-
-    var type = typeObject.options[typeObject.selectedIndex].value;
     var dataFrom = dataFromObject.options[dataFromObject.selectedIndex].value;
-    var dataType = dataTypeObject.options[dataTypeObject.selectedIndex].value;
 
-    if(dataFrom == "static" &&  dataType == "text"){
+    if(dataFrom == "static"){
         staticParameterValueObject.disabled = false;
     }
-    if(!(dataFrom == "static" &&  dataType == "text")){
+    if(!(dataFrom == "static")){
         staticParameterValueObject.disabled = true;
+        staticParameterValueObject.value = "";
     }
-
-    if(type == "header" &&  dataFrom == "static" && dataType !="text" && dataType !=""){
-        mediaFileObject.disabled = false;
-    }
-    if(!(type == "header" &&  dataFrom == "static" && dataType !="text" && dataType !="")){
-        mediaFileObject.disabled = true;
-    }
-
-
-   /*  if(dataFrom != "static" &&  dataType != "text"){
-        staticParameterValueObject.disabled = true;
-    }
-
-    if(dataFrom == "static" &&  dataType != "text" && type == "head"){
-        staticParameterValueObject.disabled = true;
-        mediaFileObject.disabled = false;
-    } */
-
-    console.log(type + " " + dataFrom + " " + dataType);
-
-
     
 }

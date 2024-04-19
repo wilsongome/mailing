@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-    <h4>Whatsapp Message Templates</h4>
+<x-layout.page_header pageTitle="Message Templates" />
 @stop
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content_header')
-    <h4>Whatsapp Account</h4>
+<x-layout.page_header pageTitle="Whatsapp Account" />
 @stop
 
 @section('content')

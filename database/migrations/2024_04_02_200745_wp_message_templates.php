@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('wp_account_id');
             $table->string('external_id');
             $table->string('name');
-            $table->string('template', 500);
+            $table->string('template', 1032);
             $table->timestamps();
             $table->foreign('wp_account_id')->references('id')->on('wp_accounts')->onDelete('cascade');
         });

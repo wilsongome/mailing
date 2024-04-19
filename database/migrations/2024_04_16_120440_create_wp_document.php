@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('wp_documents', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('wp_chat_id');
-            $table->string('local_file_path');
-            $table->string('local_file_name');
-            $table->string('link');
-            $table->string('external_id');
-            $table->string('type');
+            $table->bigInteger('wp_chat_id')->nullable();
+            $table->string('local_file_path', 500);
+            $table->string('local_file_name', 500);
+            $table->string('link', 500);
+            $table->string('external_id', 100)->nullable();
+            $table->string('type', 100);
             $table->integer('size');
-            $table->string('file_extension');
+            $table->string('file_extension', 100);
+            $table->string('wp_type', 100);
             $table->timestamps();
         });
     }

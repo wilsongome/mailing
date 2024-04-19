@@ -1,6 +1,7 @@
 <?php
 namespace App\Domain\Whatsapp\Document;
 
+use App\Domain\Whatsapp\Document\SupportedMediaTypes;
 use App\Models\WpDocument as WpDocumentModel;
 use Exception;
 use Illuminate\Http\UploadedFile;
@@ -80,15 +81,22 @@ class WpDocument{
             $this->localFileName = $file->getClientOriginalName();
             $this->fileExtension = $file->getClientOriginalExtension();
             $this->type = $file->getClientMimeType();
-            $this->size = $file->getSize();
+            $this->size = round($file->getSize()/1024);
 
+            $supportedMediaTypes = new SupportedMediaTypes();
+            $validatedMedia = $supportedMediaTypes->validate($this->type, $this->size);
         
-            if(!SupportedMediaTypes::isSupoorted($this->type, $this->size)){
-                throw new InvalidArgumentException("Invalid file type!");
+            if(!$validatedMedia->isValid){
+                if(!$validatedMedia->validMimeType){
+                    throw new InvalidArgumentException("Invalid file type!");
+                }
+
+                if(!$validatedMedia->validSize){
+                    throw new InvalidArgumentException("Invalid file size!");
+                }
             }
 
             $this->localFilePath = Storage::putFile('wp_documents/chat_'.$this->wpChaptId, $file);
-            //$this->localFilePath = $file->storeAs('/app/chat_'.$this->wpChaptId);
 
             $this->store();
            

@@ -63,6 +63,9 @@
         <div class="col-sm-6">
             <input maxlength="60" disabled class="form-control" type="text" name="staticHeaderValue" id="staticHeaderValue" value="" placeholder="Static Text"/>
         </div>
+        <div class="col-sm-4">
+            <input disabled class="form-control" type="file" name="mediaFile" id="mediaFile"  placeholder="Select a media"/>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
@@ -70,7 +73,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-8">
         <input maxlength="60" class="form-control" type="text" name="staticFooterValue" id="staticFooterValue" value="" placeholder="Static Text"/>
         </div>
     </div>
@@ -89,7 +92,7 @@
         </div>
         <div class="col-sm-2">
             <select class="form-control" name="parameterDataFrom" id="parameterDataFrom" onchange="handleParameter()">
-                <option value="">No parametes</option>
+                <option value="">No parameters</option>
                 <optgroup label="Static Parameters">
                     <option value="static">Static Value</option>
                 </optgroup>
@@ -104,24 +107,8 @@
                 </optgroup>
             </select>
         </div>
-        <div class="col-sm-2">
-            <select class="form-control" name="parameterDataType" id="parameterDataType" onchange="handleParameter()">
-                <option value="">No parametes</option>
-                <optgroup label="Text">
-                    <option value="text">Text</option>
-                </optgroup>
-                <optgroup label="Media">
-                    <option value="document">Document</option>
-                    <option value="image">Image</option>
-                    <option value="video">Video</option>
-                </optgroup>
-            </select>
-        </div>
         <div class="col-sm-4">
             <input maxlength="60" disabled class="form-control" type="text" name="staticParameterValue" id="staticParameterValue" value="" placeholder="Static Text"/>
-        </div>
-        <div class="col-sm-2">
-            <input disabled class="form-control" type="file" name="mediaFile" id="mediaFile"  placeholder="Selec a media"/>
         </div>
     </div>
 </form>
