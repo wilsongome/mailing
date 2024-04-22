@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Whatsapp\Chat;
 
-use App\Domain\Message\WpMessageInterface;
+use App\Domain\Whatsapp\Message\WpMessageInterface;
 
 class WpChatMessage{
 

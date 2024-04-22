@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WpDocument extends Model
+class WpMedia extends Model
 {
     use HasFactory;
 

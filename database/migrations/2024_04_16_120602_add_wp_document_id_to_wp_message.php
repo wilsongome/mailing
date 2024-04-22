@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('wp_messages', function (Blueprint $table) {
-            $table->bigInteger('wp_document_id')->nullable()->after('type');
+            $table->bigInteger('wp_media_id')->nullable()->after('type');
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('wp_messages', function (Blueprint $table) {
-            $table->dropColumn('wp_document_id');
+            $table->dropColumn('wp_media_id');
         });
     }
 };

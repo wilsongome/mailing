@@ -5,7 +5,7 @@ use App\Domain\Whatsapp\Media\WpMedia;
 use Exception;
 use InvalidArgumentException;
 
-class WpDocumentMessage extends WpMessage implements WpMessageInterface{
+class WpAudioMessage extends WpMessage implements WpMessageInterface{
 
     public string $localFilePath;
     public string $localFileName;
@@ -25,7 +25,7 @@ class WpDocumentMessage extends WpMessage implements WpMessageInterface{
         $this->contactId = $contactId;
         $this->wpChatId = $wpChatId;
         $this->wpMedia = $wpMedia;
-        $this->type = "DOCUMENT";
+        $this->type = "AUDIO";
       
     }
 

@@ -84,6 +84,24 @@ function buildMessage(message, systemName, contactName)
     var margin = ' style="margin-left: 53%;"';
     var floatName = 'left';
     var floatTime = 'right';
+    var isMedia = false;
+
+    if(message.type == "AUDIO"){
+        isMedia = true;
+    }
+    if(message.type == "DOCUMENT"){
+        isMedia = true;
+    }
+    if(message.type == "IMAGE"){
+        isMedia = true;
+    }
+    if(message.type == "VIDEO"){
+        isMedia = true;
+    }
+    if(message.type == "STICKER"){
+        isMedia = true;
+    }
+
     var userIcon = '<i class="far fa-user-circle direct-chat-img"></i>';
     if(message.direction == "IN"){
         msgAlign = ' right';
@@ -103,8 +121,8 @@ function buildMessage(message, systemName, contactName)
     htmlMessage += '</div>';
     htmlMessage += userIcon;
     htmlMessage += '<div class="direct-chat-text">';
-    if(message.type =="document"){
-        htmlMessage += '<a href="../wpmessage/chat/'+message.wp_chat_id+'/document/'+message.wp_document.id+'"><span class="badge badge-info"><i class="far fa-file"></i> '+ message.wp_document.local_file_name + '</span></a><br>'
+    if(isMedia == true){
+        htmlMessage += '<a href="../wpmessage/chat/'+message.wp_chat_id+'/document/'+message.wp_media.id+'"><span class="badge badge-info"><i class="far fa-file"></i> '+ message.wp_media.local_file_name + '</span></a><br>'
     }
     htmlMessage += message.body;
     htmlMessage += '</div>';

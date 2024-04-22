@@ -2,12 +2,16 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Whatsapp\Chat\WpChat;
-use App\Domain\Whatsapp\Document\WpDocument;
+use App\Domain\Whatsapp\Media\WpMedia;
+use App\Domain\Whatsapp\Media\WpMediaType;
+use App\Domain\Whatsapp\Message\Sender\Netflie\WpAudioMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpDocumentMessageSender;
+use App\Domain\Whatsapp\Message\Sender\Netflie\WpImageMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTextMessageSender;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
 use App\Domain\Whatsapp\Message\WpDocumentMessage;
+use App\Domain\Whatsapp\Message\WpMessageBuilder;
 use App\Domain\Whatsapp\Message\WpMessageInterface;
 use App\Domain\Whatsapp\Message\WpTemplateMessage;
 use App\Domain\Whatsapp\Message\WpTextMessage;
@@ -20,15 +24,15 @@ use InvalidArgumentException;
 
 class WpMessageController extends Controller
 {
-    public function documentDownload(Request $request)
+    public function mediaDownload(Request $request)
     {
-        $wpDocument = new WpDocument($request->chatId, $request->id);
+        $wpDocument = new WpMedia($request->chatId, $request->id);
         return Storage::download($wpDocument->localFilePath, $wpDocument->localFileName);
     }
 
     public function getMessagesByChat(int $wpChatId)
     {
-        return WpMessage::with('wpDocument')->where('wp_chat_id', $wpChatId)->get();
+        return WpMessage::with('wpMedia')->where('wp_chat_id', $wpChatId)->get();
     }
 
 
@@ -38,7 +42,7 @@ class WpMessageController extends Controller
         return response()->json(["messages" => $messages],'200');
     }
 
-    private function buildDocumentMessage(WpChat $wpChat, WpDocument $wpDocument, string $textMessage)
+    private function buildDocumentMessage(WpChat $wpChat, WpMedia $wpMedia, string $textMessage)
     {
         try{
 
@@ -47,7 +51,7 @@ class WpMessageController extends Controller
                 $wpChat->wpNumberId,
                 $wpChat->wpAccountId,
                 $wpChat->id,
-                $wpDocument
+                $wpMedia
             );
             $wpDocumentMessage->body = $textMessage ?? "";
             $wpDocumentMessage->sendTime = new DateTime();
@@ -132,6 +136,8 @@ class WpMessageController extends Controller
 
         $message = null;
 
+        $builder = new WpMessageBuilder($wpChat);
+
         if($request->messageType == "template"){
             $message = $this->buildTemplateMessage($wpChat, $request->wpMessageTemplateId);
             $sender = new WpTemplateMessageSender($wpAccount, $wpNumber, $contact, $message);
@@ -142,12 +148,25 @@ class WpMessageController extends Controller
             $sender = new WpTextMessageSender($wpAccount, $wpNumber, $contact, $message);
         }
 
-        if($request->messageType == "document"){
-            $wpDocument = new WpDocument($wpChat->id, 0);
-            if($wpDocument->upload($request->file('documentMessageFile'))){
-                $message = $this->buildDocumentMessage($wpChat, $wpDocument, $request->documentMessageCaption ?? "");
+        if($request->messageType == "media"){
+            $wpMedia = new WpMedia($wpChat->id, 0);
+            $upload = $wpMedia->upload($request->file('documentMessageFile'));
+            
+            if($upload && $wpMedia->wpType == WpMediaType::DOCUMENT){
+                $message = $builder->buildDocumentMessage($wpMedia, $request->documentMessageCaption ?? "");
                 $sender = new WpDocumentMessageSender($wpAccount, $wpNumber, $contact, $message);
             }
+
+            if($upload && $wpMedia->wpType == WpMediaType::IMAGE){
+                $message = $builder->buildImageMessage($wpMedia, $request->documentMessageCaption ?? "");
+                $sender = new WpImageMessageSender($wpAccount, $wpNumber, $contact, $message);
+            }
+
+            if($upload && $wpMedia->wpType == WpMediaType::AUDIO){
+                $message = $builder->buildAudioMessage($wpMedia);
+                $sender = new WpAudioMessageSender($wpAccount, $wpNumber, $contact, $message);
+            }
+                
         }
 
         if(!$sender || !$message){
@@ -164,7 +183,7 @@ class WpMessageController extends Controller
 
         $this->dispatch($message, $sender);
 
-        if($request->messageType == "document"){
+        if($request->messageType == "media"){
             return redirect()->route('wpchat.edit',['id'=>$wpChat->id]);
         }
         

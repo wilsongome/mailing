@@ -1,5 +1,5 @@
 <?php
-namespace App\Domain\Whatsapp\Document;
+namespace App\Domain\Whatsapp\Media;
 
 use App\Domain\Whatsapp\Media\WpMediaType;
 use stdClass;

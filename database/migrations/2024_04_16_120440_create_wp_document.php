@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wp_documents', function (Blueprint $table) {
+        Schema::create('wp_media', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('wp_chat_id')->nullable();
             $table->string('local_file_path', 500);
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('wp_documents');
+        Schema::drop('wp_media');
     }
 };

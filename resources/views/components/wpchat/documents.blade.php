@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Document Message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Media Message</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,7 +11,7 @@
         <form id="formDocumentMessage" method="post" enctype="multipart/form-data" action="{{route('wpmessage.send')}}">
           @csrf
           <input type="hidden" name="wpChatId" value="1" />
-          <input type="hidden" name="messageType" value="document" />
+          <input type="hidden" name="messageType" value="media" />
           <input type="text" class="form-control" name="documentMessageCaption" id="documentMessageCaption" placeholder="Type a message" />
           <input type="file" class="form-control" name="documentMessageFile" id="documentMessageFile" />
         </form>

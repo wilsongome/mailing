@@ -6,61 +6,60 @@ use App\Domain\Whatsapp\Account\WpAccount;
 use App\Domain\Whatsapp\Media\Uploader\Netflie\WpMediaUploader;
 use App\Domain\Whatsapp\Message\Response\WpMessageResponse;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
-use App\Domain\Whatsapp\Message\WpDocumentMessage;
+use App\Domain\Whatsapp\Message\WpImageMessage;
 use App\Domain\Whatsapp\Number\WpNumber;
-use Exception;
 use Netflie\WhatsAppCloudApi\Message\Media\MediaObjectID;
 use Netflie\WhatsAppCloudApi\Response\ResponseException;
 use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 use stdClass;
 
-class WpDocumentMessageSender implements WpSenderInterface{
+class WpImageMessageSender implements WpSenderInterface{
 
     private WpAccount $wpAccount;
     private WpNumber $wpNumber;
     private Contact $contact;
-    private WpDocumentMessage $wpDocumentMessage;
+    private WpImageMessage $wpImageMessage;
 
     public function __construct(
         WpAccount $wpAccount,
         WpNumber $wpNumber,
         Contact $contact,
-        WpDocumentMessage $wpDocumentMessage)
+        WpImageMessage $wpImageMessage)
     {
         $this->wpAccount = $wpAccount;
         $this->wpNumber = $wpNumber;
         $this->contact = $contact;
-        $this->wpDocumentMessage = $wpDocumentMessage;
+        $this->wpImageMessage = $wpImageMessage;
     }
 
     private function getMediaId() : stdClass
     {
         $media = new stdClass();
 
-        if(isset($this->wpDocumentMessage->wpMedia->link)){
-            $media->id = $this->wpDocumentMessage->wpMedia->link;
+        if(isset($this->wpImageMessage->wpMedia->link)){
+            $media->id = $this->wpImageMessage->wpMedia->link;
             $media->type = "link";
             return $media;
         }
 
-        if(isset($this->wpDocumentMessage->wpMedia->externalId)){
-           $media->id = $this->wpDocumentMessage->wpMedia->externalId;
+        if(isset($this->wpImageMessage->wpMedia->externalId)){
+           $media->id = $this->wpImageMessage->wpMedia->externalId;
            $media->type = "id";
            return $media;
         }
 
         if(
-            isset($this->wpDocumentMessage->wpMedia->id)
+            isset($this->wpImageMessage->wpMedia->id)
             &&
-            !isset($this->wpDocumentMessage->wpMedia->externalId)
+            !isset($this->wpImageMessage->wpMedia->externalId)
             &&
-            isset($this->wpDocumentMessage->wpMedia->localFilePath)
+            isset($this->wpImageMessage->wpMedia->localFilePath)
             )
         {
             $uploader = new WpMediaUploader(
                 $this->wpAccount,
                 $this->wpNumber,
-                $this->wpDocumentMessage->wpMedia
+                $this->wpImageMessage->wpMedia
             );
 
             $media->id = $uploader->upload();
@@ -83,11 +82,10 @@ class WpDocumentMessageSender implements WpSenderInterface{
         $mediaObjectId->type($media->type);
 
         try{
-            $response = $wpCloudApi->sendDocument(
+            $response = $wpCloudApi->sendImage(
                 $this->contact->whatsappNumber,
                 $mediaObjectId,
-                $this->wpDocumentMessage->wpMedia->localFileName,
-                $this->wpDocumentMessage->body
+                $this->wpImageMessage->body
             );
         }catch(ResponseException $e){
             $httpStatusCode = $e->response()->httpStatusCode();
@@ -95,7 +93,6 @@ class WpDocumentMessageSender implements WpSenderInterface{
             return new WpMessageResponse($httpStatusCode, "", "error", $message);
         }
         
-
         return new WpMessageResponse(
             $response->httpStatusCode(),
             $response->decodedBody()['messages'][0]['id'],

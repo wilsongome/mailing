@@ -6,6 +6,7 @@ use App\Domain\Whatsapp\Account\WpAccount;
 use App\Domain\Whatsapp\Media\Uploader\Netflie\WpMediaUploader;
 use App\Domain\Whatsapp\Message\Response\WpMessageResponse;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
+use App\Domain\Whatsapp\Message\WpAudioMessage;
 use App\Domain\Whatsapp\Message\WpDocumentMessage;
 use App\Domain\Whatsapp\Number\WpNumber;
 use Exception;
@@ -14,53 +15,53 @@ use Netflie\WhatsAppCloudApi\Response\ResponseException;
 use Netflie\WhatsAppCloudApi\WhatsAppCloudApi;
 use stdClass;
 
-class WpDocumentMessageSender implements WpSenderInterface{
+class WpAudioMessageSender implements WpSenderInterface{
 
     private WpAccount $wpAccount;
     private WpNumber $wpNumber;
     private Contact $contact;
-    private WpDocumentMessage $wpDocumentMessage;
+    private WpAudioMessage $wpAudioMessage;
 
     public function __construct(
         WpAccount $wpAccount,
         WpNumber $wpNumber,
         Contact $contact,
-        WpDocumentMessage $wpDocumentMessage)
+        WpAudioMessage $wpAudioMessage)
     {
         $this->wpAccount = $wpAccount;
         $this->wpNumber = $wpNumber;
         $this->contact = $contact;
-        $this->wpDocumentMessage = $wpDocumentMessage;
+        $this->wpAudioMessage = $wpAudioMessage;
     }
 
     private function getMediaId() : stdClass
     {
         $media = new stdClass();
 
-        if(isset($this->wpDocumentMessage->wpMedia->link)){
-            $media->id = $this->wpDocumentMessage->wpMedia->link;
+        if(isset($this->wpAudioMessage->wpMedia->link)){
+            $media->id = $this->wpAudioMessage->wpMedia->link;
             $media->type = "link";
             return $media;
         }
 
-        if(isset($this->wpDocumentMessage->wpMedia->externalId)){
-           $media->id = $this->wpDocumentMessage->wpMedia->externalId;
+        if(isset($this->wpAudioMessage->wpMedia->externalId)){
+           $media->id = $this->wpAudioMessage->wpMedia->externalId;
            $media->type = "id";
            return $media;
         }
 
         if(
-            isset($this->wpDocumentMessage->wpMedia->id)
+            isset($this->wpAudioMessage->wpMedia->id)
             &&
-            !isset($this->wpDocumentMessage->wpMedia->externalId)
+            !isset($this->wpAudioMessage->wpMedia->externalId)
             &&
-            isset($this->wpDocumentMessage->wpMedia->localFilePath)
+            isset($this->wpAudioMessage->wpMedia->localFilePath)
             )
         {
             $uploader = new WpMediaUploader(
                 $this->wpAccount,
                 $this->wpNumber,
-                $this->wpDocumentMessage->wpMedia
+                $this->wpAudioMessage->wpMedia
             );
 
             $media->id = $uploader->upload();
@@ -83,11 +84,9 @@ class WpDocumentMessageSender implements WpSenderInterface{
         $mediaObjectId->type($media->type);
 
         try{
-            $response = $wpCloudApi->sendDocument(
+            $response = $wpCloudApi->sendAudio(
                 $this->contact->whatsappNumber,
-                $mediaObjectId,
-                $this->wpDocumentMessage->wpMedia->localFileName,
-                $this->wpDocumentMessage->body
+                $mediaObjectId
             );
         }catch(ResponseException $e){
             $httpStatusCode = $e->response()->httpStatusCode();

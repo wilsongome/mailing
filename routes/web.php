@@ -164,6 +164,6 @@ Route::middleware(Authenticator::class)->group(function (){
     Route::controller(WpMessageController::class)->group(function (){
         Route::post('/wpmessage/send', 'send')->name('wpmessage.send');
         Route::get('/wpmessage/load/{id}', 'loadChatMessages')->name('wpmessage.load');
-        Route::get('/wpmessage/chat/{chatId}/document/{id}', 'documentDownload')->name('wpmessage.document.download');
+        Route::get('/wpmessage/chat/{chatId}/document/{id}', 'mediaDownload')->name('wpmessage.media.download');
     });
 });
