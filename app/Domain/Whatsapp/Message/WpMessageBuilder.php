@@ -16,7 +16,6 @@ class WpMessageBuilder{
         $this->wpChat = $wpChat;
     }
 
-
     public function buildTextMessage(string $textMessage) : WpTextMessage
     {
         try{
@@ -88,7 +87,7 @@ class WpMessageBuilder{
         }
     }
 
-    public function buildImageMessage(WpMedia $wpMedia, string $textMessage) : WpImageMessage
+    public function buildImageMessage(WpMedia $wpMedia, string $textMessage = "") : WpImageMessage
     {
         try{
 
@@ -99,7 +98,7 @@ class WpMessageBuilder{
                 $this->wpChat->id,
                 $wpMedia
             );
-            $wpImageMessage->body = $textMessage ?? "";
+            $wpImageMessage->body = $textMessage;
             $wpImageMessage->sendTime = new DateTime();
             $wpImageMessage->direction = "OUT";
             $wpImageMessage->user = "Frow";
@@ -111,7 +110,31 @@ class WpMessageBuilder{
         }
     }
 
-    public function buildDocumentMessage(WpMedia $wpMedia, string $textMessage) : WpDocumentMessage
+    public function buildVideoMessage(WpMedia $wpMedia, string $textMessage = "") : WpVideoMessage
+    {
+        try{
+
+            $wpVideoMessage = new WpVideoMessage(
+                $this->wpChat->wpAccountId,
+                $this->wpChat->wpNumberId,
+                $this->wpChat->wpAccountId,
+                $this->wpChat->id,
+                $wpMedia
+            );
+
+            $wpVideoMessage->body = $textMessage;
+            $wpVideoMessage->sendTime = new DateTime();
+            $wpVideoMessage->direction = "OUT";
+            $wpVideoMessage->user = "Frow";
+
+            return $wpVideoMessage;
+
+        }catch(InvalidArgumentException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function buildDocumentMessage(WpMedia $wpMedia, string $textMessage = "") : WpDocumentMessage
     {
         try{
 
@@ -122,7 +145,7 @@ class WpMessageBuilder{
                 $this->wpChat->id,
                 $wpMedia
             );
-            $wpDocumentMessage->body = $textMessage ?? "";
+            $wpDocumentMessage->body = $textMessage;
             $wpDocumentMessage->sendTime = new DateTime();
             $wpDocumentMessage->direction = "OUT";
             $wpDocumentMessage->user = "Frow";

@@ -43,5 +43,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
+#Configura o PHP
+COPY .docker/php.ini "${PHP_INI_DIR}"
+
 #Configura permissões
 RUN chown -R www-data:www-data /var/www/html 

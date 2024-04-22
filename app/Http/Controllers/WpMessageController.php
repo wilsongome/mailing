@@ -9,6 +9,7 @@ use App\Domain\Whatsapp\Message\Sender\Netflie\WpDocumentMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpImageMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTextMessageSender;
+use App\Domain\Whatsapp\Message\Sender\Netflie\WpVideoMessageSender;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
 use App\Domain\Whatsapp\Message\WpMessageBuilder;
 use App\Domain\Whatsapp\Message\WpMessageInterface;
@@ -87,6 +88,11 @@ class WpMessageController extends Controller
             if($upload && $wpMedia->wpType == WpMediaType::IMAGE){
                 $message = $builder->buildImageMessage($wpMedia, $request->documentMessageCaption ?? "");
                 $sender = new WpImageMessageSender($wpAccount, $wpNumber, $contact, $message);
+            }
+
+            if($upload && $wpMedia->wpType == WpMediaType::VIDEO){
+                $message = $builder->buildVideoMessage($wpMedia, $request->documentMessageCaption ?? "");
+                $sender = new WpVideoMessageSender($wpAccount, $wpNumber, $contact, $message);
             }
 
             if($upload && $wpMedia->wpType == WpMediaType::AUDIO){

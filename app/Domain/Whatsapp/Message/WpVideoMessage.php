@@ -5,7 +5,7 @@ use App\Domain\Whatsapp\Media\WpMedia;
 use Exception;
 use InvalidArgumentException;
 
-class WpAudioMessage extends WpMessage implements WpMessageInterface{
+class WpVideoMessage extends WpMessage implements WpMessageInterface{
 
     public string $localFilePath;
     public string $localFileName;
@@ -25,7 +25,7 @@ class WpAudioMessage extends WpMessage implements WpMessageInterface{
         $this->contactId = $contactId;
         $this->wpChatId = $wpChatId;
         $this->wpMedia = $wpMedia;
-        $this->type = "AUDIO";
+        $this->type = "VIDEO";
       
     }
 
@@ -34,7 +34,6 @@ class WpAudioMessage extends WpMessage implements WpMessageInterface{
         try{
             $wpMessageModel = $this->getModel();
             $wpMessageModel->wp_media_id = $this->wpMedia->id;
-            $wpMessageModel->
             
             $wpMessageModel->save();
 
