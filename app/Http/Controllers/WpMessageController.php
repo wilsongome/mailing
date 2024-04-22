@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Domain\Whatsapp\Chat\WpChat;
+
 use App\Domain\Whatsapp\Media\WpMedia;
 use App\Domain\Whatsapp\Media\WpMediaType;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpAudioMessageSender;
@@ -10,17 +10,12 @@ use App\Domain\Whatsapp\Message\Sender\Netflie\WpImageMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTemplateMessageSender;
 use App\Domain\Whatsapp\Message\Sender\Netflie\WpTextMessageSender;
 use App\Domain\Whatsapp\Message\Sender\WpSenderInterface;
-use App\Domain\Whatsapp\Message\WpDocumentMessage;
 use App\Domain\Whatsapp\Message\WpMessageBuilder;
 use App\Domain\Whatsapp\Message\WpMessageInterface;
-use App\Domain\Whatsapp\Message\WpTemplateMessage;
-use App\Domain\Whatsapp\Message\WpTextMessage;
 use App\Jobs\WpMessageSenderJob;
 use App\Models\WpMessage;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use InvalidArgumentException;
 
 class WpMessageController extends Controller
 {
@@ -40,76 +35,6 @@ class WpMessageController extends Controller
     {
         $messages = $this->getMessagesByChat($request->id);
         return response()->json(["messages" => $messages],'200');
-    }
-
-    private function buildDocumentMessage(WpChat $wpChat, WpMedia $wpMedia, string $textMessage)
-    {
-        try{
-
-            $wpDocumentMessage = new WpDocumentMessage(
-                $wpChat->wpAccountId,
-                $wpChat->wpNumberId,
-                $wpChat->wpAccountId,
-                $wpChat->id,
-                $wpMedia
-            );
-            $wpDocumentMessage->body = $textMessage ?? "";
-            $wpDocumentMessage->sendTime = new DateTime();
-            $wpDocumentMessage->direction = "OUT";
-            $wpDocumentMessage->user = "Frow";
-            return $wpDocumentMessage;
-        }catch(InvalidArgumentException $e){
-            echo $e->getMessage();
-        }
-    }
-
-    private function buildTemplateMessage(WpChat $wpChat, int $wpTemplateId)
-    {
-        try{
-            $wpMessageTemplateController = new WpMessageTemplateController();
-            $wpMessageTemplate = $wpMessageTemplateController->find($wpTemplateId);
-
-            $wpTemplateMessage = new WpTemplateMessage
-            (
-                $wpChat->wpAccountId,
-                $wpChat->wpNumberId,
-                $wpChat->wpAccountId,
-                $wpChat->id,
-                $wpMessageTemplate
-            );
-
-            $wpTemplateMessage->body = $wpMessageTemplate->template;
-            $wpTemplateMessage->sendTime = new DateTime();
-            $wpTemplateMessage->direction = "OUT";
-            $wpTemplateMessage->user = "Frow";
-            return $wpTemplateMessage;
-
-        }catch(InvalidArgumentException $e){
-            echo $e->getMessage();
-        }
-    }
-
-    private function buildTextMessage(WpChat $wpChat, string $textMessage)
-    {
-        try{
-
-            $wpTextMessage = new WpTextMessage(
-                $wpChat->wpAccountId,
-                $wpChat->wpNumberId,
-                $wpChat->wpAccountId,
-                $wpChat->id,
-                $textMessage
-            );
-
-            $wpTextMessage->body = $textMessage;
-            $wpTextMessage->sendTime = new DateTime();
-            $wpTextMessage->direction = "OUT";
-            $wpTextMessage->user = "Frow";
-            return $wpTextMessage;
-
-        }catch(InvalidArgumentException $e){
-            echo $e->getMessage();
-        }
     }
 
     private function dispatch(WpMessageInterface $message, WpSenderInterface $sender) : void
@@ -139,12 +64,14 @@ class WpMessageController extends Controller
         $builder = new WpMessageBuilder($wpChat);
 
         if($request->messageType == "template"){
-            $message = $this->buildTemplateMessage($wpChat, $request->wpMessageTemplateId);
+            $wpMessageTemplateController = new WpMessageTemplateController();
+            $wpMessageTemplate = $wpMessageTemplateController->find($request->wpMessageTemplateId);
+            $message = $builder->buildTemplateMessage($wpMessageTemplate);
             $sender = new WpTemplateMessageSender($wpAccount, $wpNumber, $contact, $message);
         }
 
         if($request->messageType == "text"){
-            $message = $this->buildTextMessage($wpChat, $request->message);
+            $message = $builder->buildTextMessage($request->message);
             $sender = new WpTextMessageSender($wpAccount, $wpNumber, $contact, $message);
         }
 

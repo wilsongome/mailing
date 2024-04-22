@@ -3,6 +3,7 @@ namespace App\Domain\Whatsapp\Message;
 
 use App\Domain\Whatsapp\Chat\WpChat;
 use App\Domain\Whatsapp\Media\WpMedia;
+use App\Domain\Whatsapp\Template\WpMessageTemplate;
 use DateTime;
 use InvalidArgumentException;
 
@@ -13,6 +14,54 @@ class WpMessageBuilder{
     public function __construct(WpChat $wpChat)
     {
         $this->wpChat = $wpChat;
+    }
+
+
+    public function buildTextMessage(string $textMessage) : WpTextMessage
+    {
+        try{
+
+            $wpTextMessage = new WpTextMessage(
+                $this->wpChat->wpAccountId,
+                $this->wpChat->wpNumberId,
+                $this->wpChat->wpAccountId,
+                $this->wpChat->id,
+                $textMessage
+            );
+
+            $wpTextMessage->body = $textMessage;
+            $wpTextMessage->sendTime = new DateTime();
+            $wpTextMessage->direction = "OUT";
+            $wpTextMessage->user = "Frow";
+            return $wpTextMessage;
+
+        }catch(InvalidArgumentException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function buildTemplateMessage(WpMessageTemplate $wpMessageTemplate)
+    {
+        try{
+
+            $wpTemplateMessage = new WpTemplateMessage
+            (
+                $this->wpChat->wpAccountId,
+                $this->wpChat->wpNumberId,
+                $this->wpChat->wpAccountId,
+                $this->wpChat->id,
+                $wpMessageTemplate
+            );
+
+            $wpTemplateMessage->body = $wpMessageTemplate->template;
+            $wpTemplateMessage->sendTime = new DateTime();
+            $wpTemplateMessage->direction = "OUT";
+            $wpTemplateMessage->user = "Frow";
+            return $wpTemplateMessage;
+
+        }catch(InvalidArgumentException $e){
+            echo $e->getMessage();
+        }
     }
 
     public function buildAudioMessage(WpMedia $wpMedia) : WpAudioMessage
